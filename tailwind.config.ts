@@ -63,17 +63,22 @@ export default {
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
 				},
-				// Updated YAP Brand Colors - More Sophisticated
-				coral: '#E85A4F',
-				teal: '#2A9D8F',
-				mustard: '#F4A261',
-				navy: '#264653',
-				charcoal: '#495057',
-				cream: '#F8F9FA',
-				sage: '#8ABEB7',
-				slate: '#6C757D',
-				pearl: '#FEFEFE',
-				blush: '#FFE5E0'
+				// Sophisticated new color palette
+				emerald: '#10B981',
+				indigo: '#6366F1',
+				amber: '#F59E0B',
+				slate: '#334155',
+				storm: '#475569',
+				cream: '#FFFBF7',
+				mist: '#F8FAFC',
+				stone: '#78716C',
+				lavender: '#E0E7FF',
+				peach: '#FED7AA',
+				mint: '#D1FAE5'
+			},
+			fontFamily: {
+				'sans': ['Inter', 'system-ui', 'sans-serif'],
+				'display': ['Poppins', 'system-ui', 'sans-serif'],
 			},
 			borderRadius: {
 				lg: 'var(--radius)',

@@ -14,11 +14,11 @@ const Header = () => {
   ];
 
   return (
-    <header className="bg-pearl/95 backdrop-blur-md shadow-sm sticky top-0 z-50 border-b border-slate/10">
+    <header className="bg-cream/95 backdrop-blur-md shadow-sm sticky top-0 z-50 border-b border-stone/10">
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <div className="text-3xl font-bold text-navy tracking-tight">
+          <div className="text-3xl font-bold text-slate font-display tracking-tight">
             YAP
           </div>
 
@@ -28,7 +28,7 @@ const Header = () => {
               <a
                 key={item}
                 href="#"
-                className="text-charcoal hover:text-coral transition-colors duration-200 font-medium tracking-wide"
+                className="text-storm hover:text-emerald transition-colors duration-200 font-medium tracking-wide"
               >
                 {item}
               </a>
@@ -37,7 +37,7 @@ const Header = () => {
 
           {/* Mobile Menu Button */}
           <button className="lg:hidden">
-            <Menu className="w-6 h-6 text-charcoal" />
+            <Menu className="w-6 h-6 text-storm" />
           </button>
         </div>
       </div>
