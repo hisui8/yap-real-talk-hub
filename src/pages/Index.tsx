@@ -1,4 +1,3 @@
-
 import Header from "../components/Header";
 import HeroSection from "../components/HeroSection";
 import FeatureCards from "../components/FeatureCards";
@@ -9,7 +8,7 @@ import Footer from "../components/Footer";
 
 const Index = () => {
   return (
-    <div className="min-h-screen bg-cream font-sans">
+    <div className="min-h-screen bg-ivory font-sans">
       <Header />
       <HeroSection />
       <FeatureCards />

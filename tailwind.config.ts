@@ -63,18 +63,18 @@ export default {
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
 				},
-				// Sophisticated new color palette
-				emerald: '#10B981',
-				indigo: '#6366F1',
-				amber: '#F59E0B',
-				slate: '#334155',
-				storm: '#475569',
-				cream: '#FFFBF7',
-				mist: '#F8FAFC',
-				stone: '#78716C',
-				lavender: '#E0E7FF',
-				peach: '#FED7AA',
-				mint: '#D1FAE5'
+				// Sophisticated elevated color palette
+				sage: '#8FA68E',
+				plum: '#8B5A8C',
+				copper: '#C17A5B',
+				charcoal: '#2C3E4A',
+				gunmetal: '#495664',
+				ivory: '#FEFBF5',
+				pearl: '#F7F5F2',
+				dusty: '#B5A99C',
+				forest: '#4A5D4F',
+				wine: '#8B4A6B',
+				gold: '#D4A574'
 			},
 			fontFamily: {
 				'sans': ['Inter', 'system-ui', 'sans-serif'],

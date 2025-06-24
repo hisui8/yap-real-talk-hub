@@ -7,51 +7,51 @@ const FeatureCards = () => {
     {
       title: "The Wall",
       description: "Share your thoughts on monthly prompts in our collaborative space",
-      color: "bg-gradient-to-br from-emerald to-emerald/80",
+      color: "bg-gradient-to-br from-sage to-forest",
       textColor: "text-white",
       icon: "🧱"
     },
     {
       title: "The Scroll",
       description: "Fact-checked news, student art, and unbiased content in your feed",
-      color: "bg-gradient-to-br from-indigo to-indigo/80",
+      color: "bg-gradient-to-br from-plum to-wine",
       textColor: "text-white", 
       icon: "📜"
     },
     {
       title: "The Table",
       description: "Conversation starters for dinner, holidays, and social gatherings",
-      color: "bg-gradient-to-br from-amber to-amber/80",
-      textColor: "text-slate",
+      color: "bg-gradient-to-br from-copper to-gold",
+      textColor: "text-white",
       icon: "🍽️"
     },
     {
       title: "The Map",
       description: "Interactive world map of positive and negative global events",
-      color: "bg-gradient-to-br from-slate to-storm",
+      color: "bg-gradient-to-br from-charcoal to-gunmetal",
       textColor: "text-white",
       icon: "🗺️"
     },
     {
       title: "The Shop",
       description: "Trendy merch that sparks meaningful conversations",
-      color: "bg-gradient-to-br from-peach to-cream",
-      textColor: "text-storm",
+      color: "bg-gradient-to-br from-pearl to-dusty/50",
+      textColor: "text-charcoal",
       icon: "🛍️"
     },
     {
       title: "The How To",
       description: "Resources for effective dialogue and conflict resolution",
-      color: "bg-gradient-to-br from-mint/40 to-lavender/40",
-      textColor: "text-storm",
+      color: "bg-gradient-to-br from-ivory to-pearl",
+      textColor: "text-gunmetal",
       icon: "📚"
     }
   ];
 
   return (
-    <section className="py-24 px-4 bg-cream">
+    <section className="py-24 px-4 bg-ivory">
       <div className="container mx-auto">
-        <h2 className="text-5xl md:text-6xl font-bold text-center text-slate mb-20 tracking-tight font-display">
+        <h2 className="text-5xl md:text-6xl font-bold text-center text-charcoal mb-20 tracking-tight font-display">
           Explore YAP
         </h2>
         
