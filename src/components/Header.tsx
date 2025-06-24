@@ -14,11 +14,11 @@ const Header = () => {
   ];
 
   return (
-    <header className="bg-white/95 backdrop-blur-sm shadow-sm sticky top-0 z-50">
+    <header className="bg-pearl/95 backdrop-blur-md shadow-sm sticky top-0 z-50 border-b border-slate/10">
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <div className="text-3xl font-bold text-navy">
+          <div className="text-3xl font-bold text-navy tracking-tight">
             YAP
           </div>
 
@@ -28,7 +28,7 @@ const Header = () => {
               <a
                 key={item}
                 href="#"
-                className="text-charcoal hover:text-coral transition-colors duration-200 font-medium"
+                className="text-charcoal hover:text-coral transition-colors duration-200 font-medium tracking-wide"
               >
                 {item}
               </a>

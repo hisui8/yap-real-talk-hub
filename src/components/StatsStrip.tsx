@@ -16,21 +16,21 @@ const StatsStrip = () => {
   ];
 
   return (
-    <section className="bg-navy py-16 px-4">
+    <section className="bg-gradient-to-r from-navy to-charcoal py-20 px-4">
       <div className="container mx-auto">
         {/* Stats */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-12">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-16">
           {stats.map((stat, index) => (
             <div key={index} className="text-center">
-              <div className="text-4xl md:text-5xl font-bold text-coral mb-2">{stat.number}</div>
-              <div className="text-white/80 text-sm md:text-base">{stat.text}</div>
+              <div className="text-4xl md:text-5xl font-bold text-coral mb-3 tracking-tight">{stat.number}</div>
+              <div className="text-white/80 text-sm md:text-base font-light">{stat.text}</div>
             </div>
           ))}
         </div>
 
         {/* Quotes Carousel */}
         <div className="text-center">
-          <div className="text-xl md:text-2xl text-white font-medium italic mb-4">
+          <div className="text-xl md:text-2xl text-white font-light italic mb-4">
             {quotes[0]}
           </div>
         </div>
