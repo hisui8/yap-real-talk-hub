@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -61,7 +62,14 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
-				}
+				},
+				// YAP Brand Colors
+				coral: '#FF6B6B',
+				teal: '#4ECDC4',
+				mustard: '#FFE66D',
+				navy: '#2C3E50',
+				charcoal: '#34495E',
+				cream: '#FDF6E3'
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
