@@ -1,16 +1,18 @@
 
 import React from 'react';
 import { Menu } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import { Link, useLocation } from 'react-router-dom';
 
 const Header = () => {
+  const location = useLocation();
+  
   const navItems = [
-    'The Wall',
-    'The Scroll', 
-    'The Table',
-    'The Map',
-    'The Shop',
-    'The How To'
+    { name: 'The Wall', path: '/the-wall' },
+    { name: 'The Scroll', path: '/the-scroll' }, 
+    { name: 'The Table', path: '/the-table' },
+    { name: 'The Map', path: '/the-map' },
+    { name: 'The Shop', path: '/the-shop' },
+    { name: 'The How To', path: '/the-how-to' }
   ];
 
   return (
@@ -18,20 +20,24 @@ const Header = () => {
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <div className="text-3xl font-bold text-charcoal font-display tracking-tight">
+          <Link to="/" className="text-3xl font-bold text-charcoal font-display tracking-tight hover:text-sage transition-colors">
             YAP
-          </div>
+          </Link>
 
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center space-x-8">
             {navItems.map((item) => (
-              <a
-                key={item}
-                href="#"
-                className="text-gunmetal hover:text-sage transition-colors duration-200 font-medium tracking-wide"
+              <Link
+                key={item.name}
+                to={item.path}
+                className={`font-medium tracking-wide transition-colors duration-200 ${
+                  location.pathname === item.path
+                    ? 'text-sage border-b-2 border-sage'
+                    : 'text-gunmetal hover:text-sage'
+                }`}
               >
-                {item}
-              </a>
+                {item.name}
+              </Link>
             ))}
           </nav>
 
