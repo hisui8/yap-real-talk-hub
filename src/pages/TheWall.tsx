@@ -5,20 +5,39 @@ import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { Input } from '@/components/ui/input';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
-import { Plus, Heart } from 'lucide-react';
+import { Plus, Heart, MessageCircle } from 'lucide-react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 
+interface Comment {
+  id: number;
+  author: string;
+  content: string;
+  timestamp: string;
+}
+
+interface Post {
+  id: number;
+  author: string;
+  age: number;
+  content: string;
+  likes: number;
+  color: string;
+  position: { x: number; y: number };
+  comments: Comment[];
+}
+
 const TheWall = () => {
-  const [posts, setPosts] = useState([
+  const [posts, setPosts] = useState<Post[]>([
     {
       id: 1,
       author: "Maya S.",
       age: 17,
       content: "Climate change isn't just an environmental issue - it's about justice. When we talk about rising sea levels, we're talking about displaced communities.",
       likes: 24,
-      color: "bg-yellow-200",
-      position: { x: 0, y: 0 }
+      color: "bg-dusty/40",
+      position: { x: 0, y: 0 },
+      comments: []
     },
     {
       id: 2,
@@ -26,8 +45,9 @@ const TheWall = () => {
       age: 19,
       content: "Mental health conversations need to happen everywhere - at dinner tables, in classrooms, with friends. Breaking stigma starts with honest dialogue.",
       likes: 18,
-      color: "bg-pink-200",
-      position: { x: 1, y: 0 }
+      color: "bg-sage/30",
+      position: { x: 1, y: 0 },
+      comments: []
     },
     {
       id: 3,
@@ -35,8 +55,9 @@ const TheWall = () => {
       age: 20,
       content: "Young people have the most to lose and the most to gain from political decisions. We should be leading these conversations, not just participating in them.",
       likes: 32,
-      color: "bg-blue-200",
-      position: { x: 2, y: 0 }
+      color: "bg-pearl/60",
+      position: { x: 2, y: 0 },
+      comments: []
     },
     {
       id: 4,
@@ -44,37 +65,43 @@ const TheWall = () => {
       age: 18,
       content: "Politics isn't about left vs right anymore. It's about listening vs not listening. We need to create spaces where people actually hear each other.",
       likes: 15,
-      color: "bg-green-200",
-      position: { x: 0, y: 1 }
+      color: "bg-forest/20",
+      position: { x: 0, y: 1 },
+      comments: []
     }
   ]);
 
   const [newPost, setNewPost] = useState('');
   const [userName, setUserName] = useState('');
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [selectedPost, setSelectedPost] = useState<Post | null>(null);
+  const [newComment, setNewComment] = useState('');
+  const [commentAuthor, setCommentAuthor] = useState('');
+  const [isCommentDialogOpen, setIsCommentDialogOpen] = useState(false);
   const currentPrompt = "What role should young people play in shaping political discourse?";
 
   const stickyColors = [
-    "bg-yellow-200",
-    "bg-pink-200", 
-    "bg-blue-200",
-    "bg-green-200",
-    "bg-purple-200",
-    "bg-orange-200"
+    "bg-dusty/40",
+    "bg-sage/30", 
+    "bg-pearl/60",
+    "bg-forest/20",
+    "bg-gunmetal/15",
+    "bg-wine/20"
   ];
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (newPost.trim() && userName.trim()) {
       const randomColor = stickyColors[Math.floor(Math.random() * stickyColors.length)];
-      const post = {
+      const post: Post = {
         id: posts.length + 1,
         author: userName,
-        age: Math.floor(Math.random() * 10) + 16, // Random age between 16-25
+        age: Math.floor(Math.random() * 10) + 16,
         content: newPost,
         likes: 0,
         color: randomColor,
-        position: { x: posts.length % 3, y: Math.floor(posts.length / 3) }
+        position: { x: posts.length % 3, y: Math.floor(posts.length / 3) },
+        comments: []
       };
       setPosts([...posts, post]);
       setNewPost('');
@@ -89,6 +116,47 @@ const TheWall = () => {
         ? { ...post, likes: post.likes + 1 }
         : post
     ));
+  };
+
+  const handleComment = (post: Post) => {
+    setSelectedPost(post);
+    setIsCommentDialogOpen(true);
+  };
+
+  const handleCommentSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (newComment.trim() && commentAuthor.trim() && selectedPost) {
+      const comment: Comment = {
+        id: Date.now(),
+        author: commentAuthor,
+        content: newComment,
+        timestamp: new Date().toLocaleTimeString()
+      };
+      
+      setPosts(posts.map(post => 
+        post.id === selectedPost.id 
+          ? { ...post, comments: [...post.comments, comment] }
+          : post
+      ));
+      
+      setNewComment('');
+      setCommentAuthor('');
+      setIsCommentDialogOpen(false);
+      setSelectedPost(null);
+    }
+  };
+
+  // Brick wall positioning - alternating offset for odd/even rows
+  const getBrickPosition = (index: number) => {
+    const row = Math.floor(index / 3);
+    const col = index % 3;
+    const isOddRow = row % 2 === 1;
+    const offset = isOddRow ? 0.5 : 0;
+    
+    return {
+      gridColumn: `${col + 1 + offset} / span 1`,
+      gridRow: `${row + 1} / span 1`
+    };
   };
 
   return (
@@ -106,7 +174,7 @@ const TheWall = () => {
             </p>
           </div>
 
-          {/* Current Prompt - Padlet Style */}
+          {/* Current Prompt */}
           <div className="mb-12">
             <Card className="bg-gradient-to-br from-sage/30 to-forest/20 border-2 border-sage/40 shadow-xl">
               <CardHeader className="text-center pb-4">
@@ -118,41 +186,67 @@ const TheWall = () => {
             </Card>
           </div>
 
-          {/* Sticky Notes Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-8">
-            {posts.map((post) => (
-              <div
-                key={post.id}
-                className={`${post.color} p-6 rounded-lg shadow-lg transform rotate-1 hover:rotate-0 transition-transform duration-200 hover:shadow-xl cursor-pointer border-l-4 border-l-yellow-400`}
-                style={{
-                  minHeight: '200px',
-                  transform: `rotate(${Math.random() * 6 - 3}deg)`,
-                }}
-              >
-                <div className="h-full flex flex-col justify-between">
-                  <div>
-                    <p className="text-gunmetal leading-relaxed mb-4 font-medium">
-                      "{post.content}"
-                    </p>
-                  </div>
-                  <div className="mt-auto">
-                    <div className="flex justify-between items-end">
+          {/* Brick Wall Grid */}
+          <div className="relative">
+            <div className="grid grid-cols-3 gap-4 auto-rows-min">
+              {posts.map((post, index) => {
+                const rotation = Math.random() * 4 - 2; // Random rotation between -2 and 2 degrees
+                const isOddRow = Math.floor(index / 3) % 2 === 1;
+                
+                return (
+                  <div
+                    key={post.id}
+                    className={`${post.color} p-6 rounded-lg shadow-lg transform transition-all duration-200 hover:shadow-xl cursor-pointer border border-gunmetal/10 ${
+                      isOddRow && index % 3 === 0 ? 'ml-16' : ''
+                    } ${isOddRow && index % 3 === 2 ? 'mr-16' : ''}`}
+                    style={{
+                      minHeight: '220px',
+                      transform: `rotate(${rotation}deg)`,
+                      transformOrigin: 'center center'
+                    }}
+                  >
+                    <div className="h-full flex flex-col justify-between">
                       <div>
-                        <p className="font-semibold text-charcoal text-sm">{post.author}</p>
-                        <p className="text-xs text-gunmetal/70">Age {post.age}</p>
+                        <p className="text-gunmetal leading-relaxed mb-4 font-medium text-sm">
+                          "{post.content}"
+                        </p>
                       </div>
-                      <button 
-                        onClick={() => handleLike(post.id)}
-                        className="flex items-center space-x-1 text-wine hover:text-wine/80 transition-colors"
-                      >
-                        <Heart className="w-4 h-4" />
-                        <span className="text-sm font-medium">{post.likes}</span>
-                      </button>
+                      <div className="mt-auto">
+                        <div className="flex justify-between items-end mb-2">
+                          <div>
+                            <p className="font-semibold text-charcoal text-sm">{post.author}</p>
+                            <p className="text-xs text-gunmetal/70">Age {post.age}</p>
+                          </div>
+                          <div className="flex items-center space-x-2">
+                            <button 
+                              onClick={() => handleLike(post.id)}
+                              className="flex items-center space-x-1 text-wine hover:text-wine/80 transition-colors"
+                            >
+                              <Heart className="w-4 h-4" />
+                              <span className="text-sm font-medium">{post.likes}</span>
+                            </button>
+                            <button 
+                              onClick={() => handleComment(post)}
+                              className="flex items-center space-x-1 text-sage hover:text-sage/80 transition-colors"
+                            >
+                              <MessageCircle className="w-4 h-4" />
+                              <span className="text-sm font-medium">{post.comments.length}</span>
+                            </button>
+                          </div>
+                        </div>
+                        {post.comments.length > 0 && (
+                          <div className="border-t border-gunmetal/20 pt-2 mt-2">
+                            <div className="text-xs text-gunmetal/60">
+                              Latest: "{post.comments[post.comments.length - 1].content.slice(0, 30)}..."
+                            </div>
+                          </div>
+                        )}
+                      </div>
                     </div>
                   </div>
-                </div>
-              </div>
-            ))}
+                );
+              })}
+            </div>
           </div>
         </div>
       </section>
@@ -207,6 +301,71 @@ const TheWall = () => {
           </DialogContent>
         </Dialog>
       </div>
+
+      {/* Comment Dialog */}
+      <Dialog open={isCommentDialogOpen} onOpenChange={setIsCommentDialogOpen}>
+        <DialogContent className="bg-ivory border-2 border-sage/20 max-w-lg max-h-[80vh] overflow-hidden flex flex-col">
+          <DialogHeader>
+            <DialogTitle className="text-2xl text-charcoal font-display">
+              Comments on {selectedPost?.author}'s post
+            </DialogTitle>
+          </DialogHeader>
+          
+          <div className="flex-1 overflow-y-auto space-y-4">
+            {/* Original Post */}
+            {selectedPost && (
+              <div className="bg-dusty/20 p-4 rounded-lg">
+                <p className="text-gunmetal font-medium mb-2">"{selectedPost.content}"</p>
+                <p className="text-sm text-gunmetal/70">- {selectedPost.author}, Age {selectedPost.age}</p>
+              </div>
+            )}
+            
+            {/* Comments */}
+            <div className="space-y-3">
+              {selectedPost?.comments.map((comment) => (
+                <div key={comment.id} className="bg-pearl/40 p-3 rounded-lg border-l-4 border-sage/50">
+                  <p className="text-gunmetal text-sm mb-1">"{comment.content}"</p>
+                  <p className="text-xs text-gunmetal/60">- {comment.author} at {comment.timestamp}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Add Comment Form */}
+          <form onSubmit={handleCommentSubmit} className="space-y-3 pt-4 border-t border-dusty/30">
+            <Input
+              placeholder="Your name"
+              value={commentAuthor}
+              onChange={(e) => setCommentAuthor(e.target.value)}
+              className="border-dusty/30 focus:border-sage"
+              required
+            />
+            <Textarea
+              placeholder="Add your comment..."
+              value={newComment}
+              onChange={(e) => setNewComment(e.target.value)}
+              className="min-h-[80px] border-dusty/30 focus:border-sage resize-none"
+              required
+            />
+            <div className="flex justify-end space-x-2">
+              <Button 
+                type="button" 
+                variant="outline" 
+                onClick={() => setIsCommentDialogOpen(false)}
+                className="border-dusty/30 text-gunmetal hover:bg-dusty/10"
+              >
+                Cancel
+              </Button>
+              <Button 
+                type="submit" 
+                className="bg-sage hover:bg-sage/90 text-white"
+              >
+                Add Comment
+              </Button>
+            </div>
+          </form>
+        </DialogContent>
+      </Dialog>
 
       <Footer />
     </div>
