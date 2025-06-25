@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
@@ -35,7 +35,7 @@ const TheWall = () => {
       age: 17,
       content: "Climate change isn't just an environmental issue - it's about justice. When we talk about rising sea levels, we're talking about displaced communities.",
       likes: 24,
-      color: "bg-dusty/40",
+      color: "bg-stone-200/60",
       position: { x: 0, y: 0 },
       comments: []
     },
@@ -45,7 +45,7 @@ const TheWall = () => {
       age: 19,
       content: "Mental health conversations need to happen everywhere - at dinner tables, in classrooms, with friends. Breaking stigma starts with honest dialogue.",
       likes: 18,
-      color: "bg-sage/30",
+      color: "bg-slate-200/50",
       position: { x: 1, y: 0 },
       comments: []
     },
@@ -55,7 +55,7 @@ const TheWall = () => {
       age: 20,
       content: "Young people have the most to lose and the most to gain from political decisions. We should be leading these conversations, not just participating in them.",
       likes: 32,
-      color: "bg-pearl/60",
+      color: "bg-amber-100/70",
       position: { x: 2, y: 0 },
       comments: []
     },
@@ -65,7 +65,7 @@ const TheWall = () => {
       age: 18,
       content: "Politics isn't about left vs right anymore. It's about listening vs not listening. We need to create spaces where people actually hear each other.",
       likes: 15,
-      color: "bg-forest/20",
+      color: "bg-emerald-100/60",
       position: { x: 0, y: 1 },
       comments: []
     }
@@ -78,16 +78,34 @@ const TheWall = () => {
   const [newComment, setNewComment] = useState('');
   const [commentAuthor, setCommentAuthor] = useState('');
   const [isCommentDialogOpen, setIsCommentDialogOpen] = useState(false);
+  const [showPolicyDialog, setShowPolicyDialog] = useState(true);
+  const [userInitials, setUserInitials] = useState('');
   const currentPrompt = "What role should young people play in shaping political discourse?";
 
   const stickyColors = [
-    "bg-dusty/40",
-    "bg-sage/30", 
-    "bg-pearl/60",
-    "bg-forest/20",
-    "bg-gunmetal/15",
-    "bg-wine/20"
+    "bg-stone-200/60",
+    "bg-slate-200/50", 
+    "bg-amber-100/70",
+    "bg-emerald-100/60",
+    "bg-blue-100/50",
+    "bg-rose-100/60",
+    "bg-purple-100/50",
+    "bg-orange-100/60"
   ];
+
+  useEffect(() => {
+    const hasAgreed = localStorage.getItem('wall-policy-agreed');
+    if (hasAgreed) {
+      setShowPolicyDialog(false);
+    }
+  }, []);
+
+  const handlePolicyAgreement = () => {
+    if (userInitials.trim().length >= 2) {
+      localStorage.setItem('wall-policy-agreed', 'true');
+      setShowPolicyDialog(false);
+    }
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -146,23 +164,67 @@ const TheWall = () => {
     }
   };
 
-  // Brick wall positioning - alternating offset for odd/even rows
-  const getBrickPosition = (index: number) => {
-    const row = Math.floor(index / 3);
-    const col = index % 3;
-    const isOddRow = row % 2 === 1;
-    const offset = isOddRow ? 0.5 : 0;
-    
-    return {
-      gridColumn: `${col + 1 + offset} / span 1`,
-      gridRow: `${row + 1} / span 1`
-    };
-  };
-
   return (
     <div className="min-h-screen bg-ivory font-sans">
       <Header />
       
+      {/* Policy Dialog */}
+      <Dialog open={showPolicyDialog} onOpenChange={() => {}}>
+        <DialogContent className="bg-ivory border-2 border-charcoal/20 max-w-lg" hideCloseButton>
+          <DialogHeader>
+            <DialogTitle className="text-2xl text-charcoal font-display text-center mb-4">
+              Community Guidelines
+            </DialogTitle>
+          </DialogHeader>
+          <div className="space-y-4">
+            <div className="bg-pearl/60 p-4 rounded-lg border border-gunmetal/10">
+              <h3 className="font-semibold text-charcoal mb-2">No Tolerance for Disrespect</h3>
+              <p className="text-gunmetal text-sm leading-relaxed">
+                This is a space for meaningful dialogue. We maintain a zero-tolerance policy for harassment, 
+                hate speech, or disrespectful behavior of any kind.
+              </p>
+            </div>
+            
+            <div className="bg-sage/20 p-4 rounded-lg border border-gunmetal/10">
+              <h3 className="font-semibold text-charcoal mb-2">Diverse Opinions Welcome</h3>
+              <p className="text-gunmetal text-sm leading-relaxed">
+                Different perspectives are essential for meaningful dialogue. We encourage thoughtful 
+                disagreement and ask that you approach conversations with curiosity and respect.
+              </p>
+            </div>
+            
+            <div className="bg-dusty/30 p-4 rounded-lg border border-gunmetal/10">
+              <h3 className="font-semibold text-charcoal mb-2">Keep an Open Mind</h3>
+              <p className="text-gunmetal text-sm leading-relaxed">
+                Challenge your own assumptions. Listen to understand, not just to respond. 
+                Growth happens when we engage with ideas that stretch our thinking.
+              </p>
+            </div>
+            
+            <div className="pt-4 border-t border-gunmetal/20">
+              <p className="text-sm text-gunmetal/80 mb-3 text-center">
+                By entering your initials below, you agree to maintain a respectful and responsible 
+                presence in our community.
+              </p>
+              <Input
+                placeholder="Enter your initials (e.g., J.D.)"
+                value={userInitials}
+                onChange={(e) => setUserInitials(e.target.value)}
+                className="border-dusty/30 focus:border-sage text-center"
+                maxLength={10}
+              />
+              <Button 
+                onClick={handlePolicyAgreement}
+                disabled={userInitials.trim().length < 2}
+                className="w-full mt-3 bg-sage hover:bg-sage/90 text-white disabled:opacity-50"
+              >
+                I Understand & Agree
+              </Button>
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
+
       <section className="py-16 px-4 pb-32">
         <div className="container mx-auto max-w-6xl">
           <div className="text-center mb-12">
@@ -176,7 +238,7 @@ const TheWall = () => {
 
           {/* Current Prompt */}
           <div className="mb-12">
-            <Card className="bg-gradient-to-br from-sage/30 to-forest/20 border-2 border-sage/40 shadow-xl">
+            <Card className="bg-gradient-to-br from-sage/20 to-forest/10 border-2 border-sage/30 shadow-xl">
               <CardHeader className="text-center pb-4">
                 <CardTitle className="text-3xl text-charcoal font-display">This Month's Prompt</CardTitle>
               </CardHeader>
@@ -190,13 +252,13 @@ const TheWall = () => {
           <div className="relative">
             <div className="grid grid-cols-3 gap-4 auto-rows-min">
               {posts.map((post, index) => {
-                const rotation = Math.random() * 4 - 2; // Random rotation between -2 and 2 degrees
+                const rotation = Math.random() * 4 - 2;
                 const isOddRow = Math.floor(index / 3) % 2 === 1;
                 
                 return (
                   <div
                     key={post.id}
-                    className={`${post.color} p-6 rounded-lg shadow-lg transform transition-all duration-200 hover:shadow-xl cursor-pointer border border-gunmetal/10 ${
+                    className={`${post.color} p-6 rounded-lg shadow-lg transform transition-all duration-200 hover:shadow-xl cursor-pointer border border-gunmetal/20 ${
                       isOddRow && index % 3 === 0 ? 'ml-16' : ''
                     } ${isOddRow && index % 3 === 2 ? 'mr-16' : ''}`}
                     style={{
@@ -220,14 +282,14 @@ const TheWall = () => {
                           <div className="flex items-center space-x-2">
                             <button 
                               onClick={() => handleLike(post.id)}
-                              className="flex items-center space-x-1 text-wine hover:text-wine/80 transition-colors"
+                              className="flex items-center space-x-1 text-wine/80 hover:text-wine transition-colors"
                             >
                               <Heart className="w-4 h-4" />
                               <span className="text-sm font-medium">{post.likes}</span>
                             </button>
                             <button 
                               onClick={() => handleComment(post)}
-                              className="flex items-center space-x-1 text-sage hover:text-sage/80 transition-colors"
+                              className="flex items-center space-x-1 text-sage/80 hover:text-sage transition-colors"
                             >
                               <MessageCircle className="w-4 h-4" />
                               <span className="text-sm font-medium">{post.comments.length}</span>
