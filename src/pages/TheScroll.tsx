@@ -1,280 +1,220 @@
-
-import React, { useState, useRef, useEffect } from 'react';
-import { Heart, MessageCircle, Share, MoreVertical, Play, Pause, Volume2, VolumeX } from 'lucide-react';
+import React, { useState, useEffect, useRef } from 'react';
+import { Heart, MessageCircle, Share, Play, Pause, Volume2, VolumeX, MoreHorizontal } from 'lucide-react';
+import { Card, CardContent } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 
 const TheScroll = () => {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [isPlaying, setIsPlaying] = useState(true);
+  const [currentVideo, setCurrentVideo] = useState(0);
+  const [isPlaying, setIsPlaying] = useState(false);
   const [isMuted, setIsMuted] = useState(true);
-  const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const [likedPosts, setLikedPosts] = useState<{ [key: number]: boolean }>({});
+  const containerRef = useRef<HTMLDivElement>(null);
 
-  const feedItems = [
+  const samplePosts = [
     {
       id: 1,
-      type: "news",
-      title: "Global Youth Climate Summit Announces 2024 Action Plan",
-      content: "Representatives from 50 countries commit to concrete climate actions including renewable energy targets and youth-led initiatives.",
-      author: "Climate News Network",
-      avatar: "🌍",
-      verified: true,
-      likes: 2453,
-      comments: 189,
-      shares: 67,
-      category: "Environment",
-      bgGradient: "from-emerald-400 to-teal-600",
-      timeAgo: "2h"
+      username: 'YAP_Original',
+      description: 'Discussing the importance of community. #community #unity #yap',
+      videoUrl: 'https://joy.videvo.net/videvo_files/video/free/2014-08/small_watermarked/Running_On_Tarmac_preview.webm',
+      likes: 123,
+      comments: 45,
+      shares: 12,
     },
     {
       id: 2,
-      type: "art",
-      title: "Student Creates Viral Mural About Mental Health",
-      content: "High school artist Jordan's powerful mural sparks nationwide conversation about teen mental health and breaks stigma barriers.",
-      author: "Jordan M.",
-      age: "16",
-      avatar: "🎨",
-      verified: false,
-      likes: 8921,
-      comments: 445,
-      shares: 234,
-      category: "Art & Culture",
-      bgGradient: "from-purple-400 to-pink-600",
-      timeAgo: "4h"
+      username: 'Debate_Now',
+      description: 'Is technology isolating us? #tech #debate #yap',
+      videoUrl: 'https://joy.videvo.net/videvo_files/video/free/2017-03/small_watermarked/StockFootage_1703_057-preview.webm',
+      likes: 678,
+      comments: 90,
+      shares: 34,
     },
     {
       id: 3,
-      type: "news",
-      title: "New Study: Social Media's Impact on Teen Political Engagement",
-      content: "Research shows 73% of teens get political news from social platforms, reshaping how young people engage with democracy.",
-      author: "Youth Research Institute",
-      avatar: "📊",
-      verified: true,
-      likes: 1567,
-      comments: 298,
-      shares: 89,
-      category: "Technology",
-      bgGradient: "from-blue-400 to-indigo-600",
-      timeAgo: "6h"
+      username: 'Global_Talk',
+      description: 'Cultural exchange programs benefit society. #culture #global #yap',
+      videoUrl: 'https://joy.videvo.net/videvo_files/video/free/2017-03/small_watermarked/StockFootage_1703_034-preview.webm',
+      likes: 901,
+      comments: 23,
+      shares: 56,
     },
     {
       id: 4,
-      type: "student-voice",
-      title: "Why Our Generation Will Change Politics",
-      content: "We're not just waiting for change - we're creating it. From climate action to social justice, here's why Gen Z is different.",
-      author: "Alex Chen",
-      age: "18",
-      avatar: "💪",
-      verified: false,
-      likes: 12543,
-      comments: 876,
-      shares: 445,
-      category: "Politics",
-      bgGradient: "from-orange-400 to-red-600",
-      timeAgo: "8h"
+      username: 'Open_Mic',
+      description: 'The role of art in social change. #art #socialchange #yap',
+      videoUrl: 'https://joy.videvo.net/videvo_files/video/free/2017-03/small_watermarked/StockFootage_1703_078-preview.webm',
+      likes: 345,
+      comments: 67,
+      shares: 78,
     },
     {
       id: 5,
-      type: "art",
-      title: "Poetry That Heals: Words for Our Generation",
-      content: "In a world of noise, sometimes poetry cuts through. These verses speak to what it means to grow up in uncertain times.",
-      author: "Maya Rodriguez",
-      age: "17",
-      avatar: "✍️",
-      verified: false,
-      likes: 3456,
-      comments: 234,
-      shares: 123,
-      category: "Literature",
-      bgGradient: "from-rose-400 to-pink-600",
-      timeAgo: "12h"
-    }
+      username: 'Future_Forward',
+      description: 'Rethinking education for the 21st century. #education #future #yap',
+      videoUrl: 'https://joy.videvo.net/videvo_files/video/free/2017-03/small_watermarked/StockFootage_1703_115-preview.webm',
+      likes: 567,
+      comments: 89,
+      shares: 90,
+    },
   ];
 
-  const handleScroll = (direction: 'up' | 'down') => {
-    const container = scrollContainerRef.current;
-    if (!container) return;
-
-    const newIndex = direction === 'down' 
-      ? Math.min(currentIndex + 1, feedItems.length - 1)
-      : Math.max(currentIndex - 1, 0);
-    
-    setCurrentIndex(newIndex);
-    container.scrollTo({
-      top: newIndex * window.innerHeight,
-      behavior: 'smooth'
-    });
-  };
-
-  const handleLike = (itemId: number) => {
-    // Handle like functionality
-    console.log('Liked item:', itemId);
-  };
-
-  const handleComment = (itemId: number) => {
-    // Handle comment functionality
-    console.log('Comment on item:', itemId);
-  };
-
-  const handleShare = (itemId: number) => {
-    // Handle share functionality
-    console.log('Share item:', itemId);
-  };
-
   useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'ArrowDown') {
-        e.preventDefault();
-        handleScroll('down');
-      } else if (e.key === 'ArrowUp') {
-        e.preventDefault();
-        handleScroll('up');
+    const handleScroll = () => {
+      if (containerRef.current) {
+        const container = containerRef.current;
+        const scrollPosition = container.scrollTop;
+        const itemHeight = container.clientHeight;
+        const newVideoIndex = Math.round(scrollPosition / itemHeight);
+
+        setCurrentVideo(newVideoIndex);
       }
     };
 
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [currentIndex]);
+    if (containerRef.current) {
+      containerRef.current.addEventListener('scroll', handleScroll);
+    }
+
+    return () => {
+      if (containerRef.current) {
+        containerRef.current.removeEventListener('scroll', handleScroll);
+      }
+    };
+  }, []);
+
+  useEffect(() => {
+    const video = document.getElementById(`video-${currentVideo}`) as HTMLVideoElement;
+    if (video) {
+      if (isPlaying) {
+        video.play();
+      } else {
+        video.pause();
+      }
+      video.muted = isMuted;
+    }
+
+    return () => {
+      if (video) {
+        video.pause();
+      }
+    };
+  }, [currentVideo, isPlaying, isMuted]);
+
+  const togglePlay = () => {
+    setIsPlaying(!isPlaying);
+  };
+
+  const toggleMute = () => {
+    setIsMuted(!isMuted);
+  };
+
+  const handleLike = (postId: number) => {
+    setLikedPosts(prev => ({
+      ...prev,
+      [postId]: !prev[postId]
+    }));
+  };
 
   return (
-    <div className="h-screen bg-black font-sans overflow-hidden">
+    <div className="min-h-screen bg-black font-sans overflow-hidden">
+      <style>
+        {`
+          .scroll-snap-container {
+            scroll-snap-type: y mandatory;
+            scroll-behavior: smooth;
+          }
+          
+          .scroll-snap-item {
+            scroll-snap-align: start;
+            scroll-snap-stop: always;
+          }
+          
+          .tiktok-gradient {
+            background: linear-gradient(45deg, #ff0050, #ff4d6d, #c44569);
+          }
+          
+          .interaction-button {
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+          }
+          
+          .pulse-like {
+            animation: pulse 0.6s ease-in-out;
+          }
+          
+          @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+          }
+        `}
+      </style>
+
       <Header />
-      
-      <div 
-        ref={scrollContainerRef}
-        className="h-full overflow-y-scroll snap-y snap-mandatory scrollbar-hide"
-        style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
-      >
-        {feedItems.map((item, index) => (
-          <div
-            key={item.id}
-            className={`h-screen w-full snap-start relative bg-gradient-to-br ${item.bgGradient} flex items-center justify-center`}
-          >
-            {/* Content Container */}
-            <div className="relative w-full h-full flex items-center justify-center p-6">
-              {/* Main Content */}
-              <div className="max-w-2xl text-center text-white z-10">
-                <div className="mb-4">
-                  <span className="inline-block px-3 py-1 bg-black/30 rounded-full text-sm font-medium backdrop-blur-sm">
-                    {item.category}
-                  </span>
-                </div>
-                
-                <h1 className="text-3xl md:text-5xl font-bold mb-6 leading-tight">
-                  {item.title}
-                </h1>
-                
-                <p className="text-lg md:text-xl leading-relaxed mb-8 text-white/90">
-                  {item.content}
-                </p>
-                
-                {/* Author Info */}
-                <div className="flex items-center justify-center space-x-3 mb-6">
-                  <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center text-2xl backdrop-blur-sm">
-                    {item.avatar}
-                  </div>
-                  <div className="text-left">
-                    <div className="flex items-center space-x-2">
-                      <span className="font-semibold">{item.author}</span>
-                      {item.verified && <span className="text-blue-300">✓</span>}
-                    </div>
-                    {item.age && <span className="text-sm text-white/80">Age {item.age}</span>}
-                    <span className="text-sm text-white/70">{item.timeAgo}</span>
-                  </div>
-                </div>
-              </div>
 
-              {/* Side Actions */}
-              <div className="absolute right-4 bottom-24 flex flex-col space-y-6 z-20">
-                <button
-                  onClick={() => handleLike(item.id)}
-                  className="flex flex-col items-center space-y-1 text-white hover:scale-110 transition-transform"
-                >
-                  <div className="w-12 h-12 bg-black/30 rounded-full flex items-center justify-center backdrop-blur-sm">
-                    <Heart className="w-6 h-6" />
-                  </div>
-                  <span className="text-sm font-medium">{item.likes.toLocaleString()}</span>
-                </button>
+      <div ref={containerRef} className="scroll-snap-container h-[calc(100vh-100px)] overflow-y-scroll relative">
+        {samplePosts.map((post, index) => (
+          <div key={post.id} className="scroll-snap-item h-screen flex items-center justify-center relative">
+            <video
+              id={`video-${index}`}
+              src={post.videoUrl}
+              className="w-full h-full object-cover"
+              loop
+              muted={isMuted}
+              onClick={togglePlay}
+            />
 
-                <button
-                  onClick={() => handleComment(item.id)}
-                  className="flex flex-col items-center space-y-1 text-white hover:scale-110 transition-transform"
-                >
-                  <div className="w-12 h-12 bg-black/30 rounded-full flex items-center justify-center backdrop-blur-sm">
-                    <MessageCircle className="w-6 h-6" />
-                  </div>
-                  <span className="text-sm font-medium">{item.comments}</span>
-                </button>
+            {/* TikTok Style Sidebar */}
+            <div className="absolute right-4 bottom-24 z-10 flex flex-col items-center space-y-4">
+              <button onClick={() => handleLike(post.id)} className="interaction-button rounded-full p-3">
+                <Heart className={`w-7 h-7 text-white ${likedPosts[post.id] ? 'pulse-like' : ''}`} fill={likedPosts[post.id] ? 'red' : 'none'} />
+                <span className="block text-xs mt-1 text-white">{post.likes}</span>
+              </button>
 
-                <button
-                  onClick={() => handleShare(item.id)}
-                  className="flex flex-col items-center space-y-1 text-white hover:scale-110 transition-transform"
-                >
-                  <div className="w-12 h-12 bg-black/30 rounded-full flex items-center justify-center backdrop-blur-sm">
-                    <Share className="w-6 h-6" />
-                  </div>
-                  <span className="text-sm font-medium">{item.shares}</span>
-                </button>
+              <button className="interaction-button rounded-full p-3">
+                <MessageCircle className="w-7 h-7 text-white" />
+                <span className="block text-xs mt-1 text-white">{post.comments}</span>
+              </button>
 
-                <button className="flex flex-col items-center space-y-1 text-white hover:scale-110 transition-transform">
-                  <div className="w-12 h-12 bg-black/30 rounded-full flex items-center justify-center backdrop-blur-sm">
-                    <MoreVertical className="w-6 h-6" />
-                  </div>
-                </button>
-              </div>
-
-              {/* Media Controls */}
-              <div className="absolute bottom-4 left-4 flex items-center space-x-4 z-20">
-                <button
-                  onClick={() => setIsPlaying(!isPlaying)}
-                  className="w-10 h-10 bg-black/30 rounded-full flex items-center justify-center text-white backdrop-blur-sm hover:scale-110 transition-transform"
-                >
-                  {isPlaying ? <Pause className="w-5 h-5" /> : <Play className="w-5 h-5" />}
-                </button>
-                
-                <button
-                  onClick={() => setIsMuted(!isMuted)}
-                  className="w-10 h-10 bg-black/30 rounded-full flex items-center justify-center text-white backdrop-blur-sm hover:scale-110 transition-transform"
-                >
-                  {isMuted ? <VolumeX className="w-5 h-5" /> : <Volume2 className="w-5 h-5" />}
-                </button>
-              </div>
-
-              {/* Navigation Dots */}
-              <div className="absolute right-4 top-1/2 transform -translate-y-1/2 flex flex-col space-y-2 z-20">
-                {feedItems.map((_, idx) => (
-                  <div
-                    key={idx}
-                    className={`w-2 h-8 rounded-full transition-all ${
-                      idx === index ? 'bg-white' : 'bg-white/30'
-                    }`}
-                  />
-                ))}
-              </div>
-
-              {/* Scroll Hints */}
-              {index === 0 && (
-                <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-white/60 text-sm flex flex-col items-center space-y-2 animate-bounce z-20">
-                  <span>Swipe up for more</span>
-                  <div className="w-6 h-10 border-2 border-white/40 rounded-full flex justify-center">
-                    <div className="w-1 h-3 bg-white/40 rounded-full mt-2"></div>
-                  </div>
-                </div>
-              )}
+              <button className="interaction-button rounded-full p-3">
+                <Share className="w-7 h-7 text-white" />
+                <span className="block text-xs mt-1 text-white">{post.shares}</span>
+              </button>
             </div>
 
-            {/* Background Overlay */}
-            <div className="absolute inset-0 bg-black/20 z-0"></div>
+            {/* Bottom Content */}
+            <div className="absolute bottom-8 left-4 z-10 text-white">
+              <div className="flex items-center space-x-3 mb-2">
+                <div className="rounded-full bg-gray-700 w-8 h-8 flex items-center justify-center text-white">
+                  {post.username.charAt(0).toUpperCase()}
+                </div>
+                <span className="font-semibold">{post.username}</span>
+                <Button variant="outline" size="sm" className="text-white border-white hover:bg-white hover:text-black">Follow</Button>
+              </div>
+              <div className="text-sm">{post.description}</div>
+            </div>
+
+            {/* Play/Pause Button */}
+            <button onClick={togglePlay} className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-black/30 hover:bg-black/50 text-white rounded-full p-4 z-10">
+              {isPlaying ? <Pause className="w-8 h-8" /> : <Play className="w-8 h-8" />}
+            </button>
+
+            {/* Mute/Unmute Button */}
+            <button onClick={toggleMute} className="absolute top-4 right-4 bg-black/30 hover:bg-black/50 text-white rounded-full p-2 z-10">
+              {isMuted ? <VolumeX className="w-6 h-6" /> : <Volume2 className="w-6 h-6" />}
+            </button>
+
+            {/* More Options */}
+            <button className="absolute top-4 left-4 bg-black/30 hover:bg-black/50 text-white rounded-full p-2 z-10">
+              <MoreHorizontal className="w-6 h-6" />
+            </button>
           </div>
         ))}
       </div>
 
-      {/* Custom CSS for hiding scrollbar */}
-      <style jsx>{`
-        .scrollbar-hide::-webkit-scrollbar {
-          display: none;
-        }
-      `}</style>
+      <Footer />
     </div>
   );
 };

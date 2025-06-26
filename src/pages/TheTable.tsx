@@ -1,144 +1,201 @@
 
 import React, { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Button } from '@/components/ui/button';
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
+import { useNavigate } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 
 const TheTable = () => {
-  const [selectedCard, setSelectedCard] = useState<number | null>(null);
+  const [selectedSeat, setSelectedSeat] = useState<string | null>(null);
+  const navigate = useNavigate();
 
-  const conversationStarters = {
-    dinner: [
-      {
-        id: 1,
-        question: "If you could change one policy to help your generation, what would it be?",
-        context: "Great for discussing priorities and values across generations",
-        tips: "Listen for underlying values, not just surface opinions"
-      },
-      {
-        id: 2,
-        question: "What's one thing your generation does better than previous ones?",
-        context: "Builds appreciation and positive dialogue",
-        tips: "Focus on strengths and acknowledge contributions"
-      }
-    ],
-    holidays: [
-      {
-        id: 1,
-        question: "What traditions do you want to keep, and what new ones should we create?",
-        context: "Perfect for bridging generational differences during family gatherings",
-        tips: "Honor the past while embracing change"
-      },
-      {
-        id: 2,
-        question: "How has the world changed since you were my age?",
-        context: "Encourages storytelling and perspective sharing",
-        tips: "Ask follow-up questions about specific changes"
-      }
-    ],
-    social: [
-      {
-        id: 1,
-        question: "What's one issue you've changed your mind about recently?",
-        context: "Great for showing intellectual humility and growth",
-        tips: "Share your own examples first to create safety"
-      },
-      {
-        id: 2,
-        question: "If we had to solve [current issue] together, what would be your first step?",
-        context: "Moves from debate to collaboration",
-        tips: "Focus on solutions, not blame"
-      }
-    ]
+  const tableSeats = {
+    'dinner-1': {
+      position: { top: '20%', left: '30%' },
+      event: 'Family Dinner',
+      topics: [
+        "If you could change one policy to help your generation, what would it be?",
+        "What's one thing your generation does better than previous ones?",
+        "What traditions do you want to keep from our family?"
+      ]
+    },
+    'dinner-2': {
+      position: { top: '20%', left: '70%' },
+      event: 'Date Night',
+      topics: [
+        "What's something you've changed your mind about recently?",
+        "If we had to solve a problem together, what would be your approach?",
+        "What's a meaningful conversation you remember from childhood?"
+      ]
+    },
+    'holiday-1': {
+      position: { top: '80%', left: '20%' },
+      event: 'Holiday Gathering',
+      topics: [
+        "What traditions should we keep and what new ones should we create?",
+        "How has the world changed since you were my age?",
+        "What's the most important lesson you've learned this year?"
+      ]
+    },
+    'holiday-2': {
+      position: { top: '80%', left: '50%' },
+      event: 'Thanksgiving',
+      topics: [
+        "What are you most grateful for that others might not know about?",
+        "How do you think our family has grown this year?",
+        "What's one way we could better support each other?"
+      ]
+    },
+    'holiday-3': {
+      position: { top: '80%', left: '80%' },
+      event: 'Birthday Party',
+      topics: [
+        "What's the best advice someone has given you?",
+        "If you could relive one moment from this past year, what would it be?",
+        "What are you most excited about for the year ahead?"
+      ]
+    },
+    'social-1': {
+      position: { top: '50%', left: '15%' },
+      event: 'Coffee Chat',
+      topics: [
+        "What's something you're passionate about that others might not expect?",
+        "How do you handle disagreements with people you care about?",
+        "What's a belief you hold that has evolved over time?"
+      ]
+    },
+    'social-2': {
+      position: { top: '50%', left: '85%' },
+      event: 'Book Club',
+      topics: [
+        "What book or story has changed how you see the world?",
+        "How do you think technology is changing human relationships?",
+        "What's a difficult conversation you're glad you had?"
+      ]
+    }
   };
 
-  const handleCardClick = (id: number) => {
-    setSelectedCard(selectedCard === id ? null : id);
+  const handleSeatClick = (seatId: string) => {
+    setSelectedSeat(seatId);
+  };
+
+  const handleCloseDialog = () => {
+    setSelectedSeat(null);
+  };
+
+  const handleGoToHowTo = () => {
+    navigate('/the-how-to');
   };
 
   return (
-    <div className="min-h-screen bg-ivory font-sans">
+    <div className="min-h-screen bg-gradient-to-br from-amber-50 to-orange-100 font-sans">
       <Header />
       
       <section className="py-16 px-4">
         <div className="container mx-auto max-w-6xl">
           <div className="text-center mb-12">
-            <h1 className="text-5xl md:text-6xl font-bold text-charcoal mb-6 tracking-tight font-display">
+            <h1 className="text-5xl md:text-6xl font-bold text-amber-900 mb-6 tracking-tight font-display">
               The Table 🍽️
             </h1>
-            <p className="text-xl text-gunmetal/90 max-w-2xl mx-auto font-light">
-              Conversation starters for dinner, holidays, and social gatherings that bring people together
+            <p className="text-xl text-amber-800/90 max-w-2xl mx-auto font-light">
+              Click on any seat around the table to discover conversation starters for different occasions
             </p>
           </div>
 
-          <Tabs defaultValue="dinner" className="w-full">
-            <TabsList className="grid w-full grid-cols-3 mb-8 bg-pearl">
-              <TabsTrigger value="dinner" className="data-[state=active]:bg-sage data-[state=active]:text-white">
-                Dinner Table
-              </TabsTrigger>
-              <TabsTrigger value="holidays" className="data-[state=active]:bg-sage data-[state=active]:text-white">
-                Holiday Gatherings
-              </TabsTrigger>
-              <TabsTrigger value="social" className="data-[state=active]:bg-sage data-[state=active]:text-white">
-                Social Events
-              </TabsTrigger>
-            </TabsList>
+          {/* Table Container */}
+          <div className="relative mx-auto max-w-4xl h-96 md:h-[500px]">
+            {/* Table Surface */}
+            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-40 md:w-80 md:h-52 bg-gradient-to-br from-amber-800 to-amber-900 rounded-full shadow-2xl border-8 border-amber-700">
+              {/* Table Grain Effect */}
+              <div className="w-full h-full rounded-full bg-gradient-to-r from-transparent via-amber-700/30 to-transparent"></div>
+              
+              {/* Center Button */}
+              <Button
+                onClick={handleGoToHowTo}
+                className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-700 hover:to-emerald-800 text-white font-semibold px-6 py-3 rounded-full shadow-lg transition-all duration-300 hover:scale-105"
+              >
+                How To Guide 📚
+              </Button>
+            </div>
 
-            {Object.entries(conversationStarters).map(([category, starters]) => (
-              <TabsContent key={category} value={category}>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  {starters.map((starter) => (
-                    <Card 
-                      key={starter.id}
-                      className={`cursor-pointer transition-all duration-300 border-0 shadow-lg hover:shadow-xl ${
-                        selectedCard === starter.id 
-                          ? 'bg-gradient-to-br from-sage/20 to-forest/10 scale-105' 
-                          : 'bg-pearl hover:bg-dusty/10'
-                      }`}
-                      onClick={() => handleCardClick(starter.id)}
-                    >
-                      <CardHeader>
-                        <CardTitle className="text-lg text-gunmetal font-display">
-                          {starter.question}
-                        </CardTitle>
-                      </CardHeader>
-                      <CardContent>
-                        <p className="text-gunmetal/80 mb-4 leading-relaxed">
-                          {starter.context}
+            {/* Seats */}
+            {Object.entries(tableSeats).map(([seatId, seat]) => (
+              <button
+                key={seatId}
+                onClick={() => handleSeatClick(seatId)}
+                className="absolute transform -translate-x-1/2 -translate-y-1/2 w-16 h-16 md:w-20 md:h-20 bg-gradient-to-br from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 rounded-full shadow-lg transition-all duration-300 hover:scale-110 border-4 border-red-500 flex items-center justify-center group"
+                style={{
+                  top: seat.position.top,
+                  left: seat.position.left,
+                }}
+              >
+                <span className="text-white font-bold text-lg group-hover:scale-110 transition-transform">
+                  🪑
+                </span>
+                
+                {/* Seat Label */}
+                <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 bg-amber-800 text-white px-2 py-1 rounded text-xs font-semibold whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">
+                  {seat.event}
+                </div>
+              </button>
+            ))}
+
+            {/* Table Legs */}
+            <div className="absolute top-3/4 left-1/2 transform -translate-x-1/2 w-4 h-20 md:h-24 bg-gradient-to-b from-amber-800 to-amber-900 rounded-b-lg shadow-lg"></div>
+          </div>
+
+          {/* Dialog for Seat Topics */}
+          <Dialog open={selectedSeat !== null} onOpenChange={handleCloseDialog}>
+            <DialogContent className="max-w-md bg-gradient-to-br from-amber-50 to-orange-100 border-amber-200">
+              <DialogHeader>
+                <DialogTitle className="text-2xl text-amber-900 font-display text-center">
+                  {selectedSeat && tableSeats[selectedSeat as keyof typeof tableSeats]?.event} 🍽️
+                </DialogTitle>
+              </DialogHeader>
+              <div className="space-y-4">
+                <p className="text-amber-800 text-center font-medium">
+                  Perfect conversation starters for this occasion:
+                </p>
+                <div className="space-y-3">
+                  {selectedSeat && tableSeats[selectedSeat as keyof typeof tableSeats]?.topics.map((topic, index) => (
+                    <Card key={index} className="bg-white/70 border-amber-200 shadow-sm">
+                      <CardContent className="p-4">
+                        <p className="text-amber-900 text-sm leading-relaxed">
+                          "{topic}"
                         </p>
-                        {selectedCard === starter.id && (
-                          <div className="mt-4 p-4 bg-sage/10 rounded-lg border border-sage/20">
-                            <h4 className="font-semibold text-sage mb-2">💡 Conversation Tip:</h4>
-                            <p className="text-gunmetal text-sm">{starter.tips}</p>
-                          </div>
-                        )}
-                        <Button 
-                          variant="outline" 
-                          size="sm" 
-                          className="mt-4 border-sage text-sage hover:bg-sage hover:text-white"
-                        >
-                          {selectedCard === starter.id ? 'Hide Tips' : 'Show Tips'}
-                        </Button>
                       </CardContent>
                     </Card>
                   ))}
                 </div>
-              </TabsContent>
-            ))}
-          </Tabs>
+                <div className="text-center pt-4">
+                  <Button
+                    onClick={handleGoToHowTo}
+                    className="bg-emerald-600 hover:bg-emerald-700 text-white font-semibold px-6 py-2"
+                  >
+                    Learn How To Guide Conversations 📚
+                  </Button>
+                </div>
+              </div>
+            </DialogContent>
+          </Dialog>
 
           {/* Guidelines Section */}
-          <Card className="mt-12 bg-gradient-to-br from-copper/20 to-gold/10 border-0 shadow-lg">
+          <Card className="mt-12 bg-gradient-to-br from-amber-100/80 to-orange-200/80 border-amber-300 shadow-lg">
             <CardHeader>
-              <CardTitle className="text-2xl text-charcoal font-display">Guidelines for Meaningful Conversations</CardTitle>
+              <CardTitle className="text-2xl text-amber-900 font-display text-center">
+                Creating Meaningful Moments Around The Table
+              </CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                  <h4 className="font-semibold text-gunmetal mb-2">Do:</h4>
-                  <ul className="space-y-1 text-gunmetal/80">
+                  <h4 className="font-semibold text-amber-800 mb-3 flex items-center">
+                    <span className="mr-2">✨</span>
+                    Do:
+                  </h4>
+                  <ul className="space-y-2 text-amber-700">
                     <li>• Listen to understand, not to respond</li>
                     <li>• Ask follow-up questions</li>
                     <li>• Share personal experiences</li>
@@ -146,8 +203,11 @@ const TheTable = () => {
                   </ul>
                 </div>
                 <div>
-                  <h4 className="font-semibold text-gunmetal mb-2">Avoid:</h4>
-                  <ul className="space-y-1 text-gunmetal/80">
+                  <h4 className="font-semibold text-amber-800 mb-3 flex items-center">
+                    <span className="mr-2">⚠️</span>
+                    Avoid:
+                  </h4>
+                  <ul className="space-y-2 text-amber-700">
                     <li>• Making assumptions</li>
                     <li>• Interrupting or dominating</li>
                     <li>• Using absolute statements</li>
