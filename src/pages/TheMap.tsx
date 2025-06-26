@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
+import { HoverCard, HoverCardContent, HoverCardTrigger } from '@/components/ui/hover-card';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 
@@ -20,7 +21,8 @@ const TheMap = () => {
       description: "Over 1,000 young activists gather in São Paulo to develop climate action plans",
       impact: "High",
       verified: true,
-      coordinates: { lat: -23.5505, lng: -46.6333 }
+      coordinates: { lat: -23.5505, lng: -46.6333 },
+      position: { top: '65%', left: '25%' }
     },
     {
       id: 2,
@@ -31,29 +33,32 @@ const TheMap = () => {
       description: "New program provides free digital learning tools to rural communities",
       impact: "Medium",
       verified: true,
-      coordinates: { lat: -1.2921, lng: 36.8219 }
+      coordinates: { lat: -1.2921, lng: 36.8219 },
+      position: { top: '55%', left: '55%' }
     },
     {
       id: 3,
-      region: "Global",
+      region: "Global", 
       country: "Multiple",
       event: "Rising Food Insecurity",
       type: "negative",
       description: "UN reports 30% increase in food insecurity among youth populations worldwide",
       impact: "High",
       verified: true,
-      coordinates: { lat: 0, lng: 0 }
+      coordinates: { lat: 0, lng: 0 },
+      position: { top: '40%', left: '50%' }
     },
     {
       id: 4,
       region: "Southeast Asia",
-      country: "Multiple",
+      country: "Philippines",
       event: "Ocean Cleanup Progress",
       type: "positive",
       description: "Youth-led organizations remove 50 tons of plastic from ocean waters",
       impact: "Medium",
       verified: true,
-      coordinates: { lat: 1.3521, lng: 103.8198 }
+      coordinates: { lat: 1.3521, lng: 103.8198 },
+      position: { top: '60%', left: '75%' }
     },
     {
       id: 5,
@@ -64,7 +69,32 @@ const TheMap = () => {
       description: "Students across 15 cities demonstrate for democratic reform and youth representation",
       impact: "Medium",
       verified: true,
-      coordinates: { lat: 52.5200, lng: 13.4050 }
+      coordinates: { lat: 52.5200, lng: 13.4050 },
+      position: { top: '30%', left: '52%' }
+    }
+  ];
+
+  const newsUpdates = [
+    {
+      id: 1,
+      headline: "Youth Voter Turnout Reaches Record High in 12 Countries",
+      summary: "Gen Z engagement in democratic processes shows unprecedented growth across Europe and Asia.",
+      time: "2 hours ago",
+      category: "Politics"
+    },
+    {
+      id: 2,
+      headline: "Climate Action Groups Launch Global Coordination Platform",
+      summary: "Young activists from 50 countries unite to share resources and strategies.",
+      time: "4 hours ago", 
+      category: "Environment"
+    },
+    {
+      id: 3,
+      headline: "Mental Health Support Networks Expand in Universities Worldwide",
+      summary: "Student-led initiatives address rising mental health concerns on campuses.",
+      time: "6 hours ago",
+      category: "Health"
     }
   ];
 
@@ -86,7 +116,7 @@ const TheMap = () => {
               The Map 🗺️
             </h1>
             <p className="text-xl text-gunmetal/90 max-w-2xl mx-auto font-light">
-              Interactive world map tracking positive and negative global events that matter to young people
+              Witness the pulse of youth-driven change across continents. Every dot tells a story of progress or challenge shaping our generation.
             </p>
           </div>
 
@@ -134,79 +164,118 @@ const TheMap = () => {
             </Button>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            {/* Map Visualization */}
-            <Card className="bg-pearl border-0 shadow-xl">
-              <CardHeader>
-                <CardTitle className="text-2xl text-charcoal font-display">Global Event Map</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="bg-gradient-to-br from-dusty/10 to-dusty/20 rounded-xl h-96 flex items-center justify-center relative overflow-hidden">
-                  <div className="text-8xl text-gunmetal/30">🌍</div>
-                  
-                  {/* Event Markers */}
-                  {filteredEvents.map((event, index) => (
-                    <div
-                      key={event.id}
-                      className={`absolute w-4 h-4 rounded-full shadow-lg cursor-pointer animate-pulse ${
-                        event.type === 'positive' ? 'bg-sage' : 'bg-copper'
-                      }`}
-                      style={{
-                        top: `${20 + (index * 15)}%`,
-                        left: `${15 + (index * 20)}%`
-                      }}
-                      onClick={() => setSelectedRegion(selectedRegion === event.region ? null : event.region)}
-                    />
-                  ))}
-                </div>
-                <p className="text-sm text-dusty mt-4 text-center">
-                  Click on markers to explore events • Interactive map coming soon
-                </p>
-              </CardContent>
-            </Card>
-
-            {/* Event List */}
-            <div className="space-y-4">
-              <h2 className="text-2xl font-bold text-charcoal mb-6 font-display">Recent Events</h2>
-              {filteredEvents.map((event) => (
-                <Card 
-                  key={event.id} 
-                  className={`border-0 shadow-lg hover:shadow-xl transition-all cursor-pointer ${
-                    selectedRegion === event.region ? 'ring-2 ring-sage' : ''
-                  } ${
-                    event.type === 'positive' 
-                      ? 'bg-gradient-to-br from-sage/10 to-forest/5' 
-                      : 'bg-gradient-to-br from-copper/10 to-gold/5'
-                  }`}
-                  onClick={() => setSelectedRegion(selectedRegion === event.region ? null : event.region)}
-                >
-                  <CardContent className="p-6">
-                    <div className="flex items-start justify-between mb-4">
-                      <div className="flex items-center space-x-2">
-                        <Badge className={event.type === 'positive' ? 'bg-sage text-white' : 'bg-copper text-white'}>
-                          {event.region}
-                        </Badge>
-                        {event.verified && (
-                          <Badge variant="outline" className="border-forest text-forest">
-                            ✓ Verified
-                          </Badge>
-                        )}
-                      </div>
-                      <Badge variant="outline" className={`${
-                        event.impact === 'High' ? 'border-plum text-plum' : 'border-dusty text-dusty'
-                      }`}>
-                        {event.impact} Impact
-                      </Badge>
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            {/* Interactive World Map */}
+            <div className="lg:col-span-2">
+              <Card className="bg-pearl border-0 shadow-xl">
+                <CardHeader>
+                  <CardTitle className="text-2xl text-charcoal font-display">Global Event Map</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="bg-gradient-to-br from-dusty/10 to-dusty/20 rounded-xl h-96 flex items-center justify-center relative overflow-hidden">
+                    {/* World Map Silhouette */}
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <div className="text-8xl text-gunmetal/30">🌍</div>
                     </div>
-                    <h3 className="text-lg font-semibold text-gunmetal mb-2 font-display">
-                      {event.event}
+                    
+                    {/* Interactive Event Markers */}
+                    {filteredEvents.map((event) => (
+                      <HoverCard key={event.id}>
+                        <HoverCardTrigger asChild>
+                          <div
+                            className={`absolute w-4 h-4 rounded-full shadow-lg cursor-pointer transition-all duration-300 hover:scale-150 ${
+                              event.type === 'positive' ? 'bg-sage animate-pulse' : 'bg-copper animate-pulse'
+                            }`}
+                            style={{
+                              top: event.position.top,
+                              left: event.position.left
+                            }}
+                            onClick={() => setSelectedRegion(selectedRegion === event.region ? null : event.region)}
+                          />
+                        </HoverCardTrigger>
+                        <HoverCardContent className="w-80 bg-white/95 backdrop-blur-sm">
+                          <div className="space-y-2">
+                            <div className="flex items-center space-x-2">
+                              <Badge className={event.type === 'positive' ? 'bg-sage text-white' : 'bg-copper text-white'}>
+                                {event.region}
+                              </Badge>
+                              {event.verified && (
+                                <Badge variant="outline" className="border-forest text-forest">
+                                  ✓ Verified
+                                </Badge>
+                              )}
+                            </div>
+                            <h4 className="text-lg font-semibold text-gunmetal">{event.event}</h4>
+                            <p className="text-sm text-gunmetal/80">{event.description}</p>
+                            <Badge variant="outline" className={`${
+                              event.impact === 'High' ? 'border-plum text-plum' : 'border-dusty text-dusty'
+                            }`}>
+                              {event.impact} Impact
+                            </Badge>
+                          </div>
+                        </HoverCardContent>
+                      </HoverCard>
+                    ))}
+                  </div>
+                  <p className="text-sm text-dusty mt-4 text-center">
+                    Hover over markers to explore events • Click to select regions
+                  </p>
+                </CardContent>
+              </Card>
+            </div>
+
+            {/* News Updates Column */}
+            <div className="space-y-6">
+              <h2 className="text-2xl font-bold text-charcoal mb-6 font-display">Live Updates</h2>
+              {newsUpdates.map((news) => (
+                <Card key={news.id} className="border-0 shadow-lg hover:shadow-xl transition-all bg-gradient-to-br from-ivory to-pearl/50">
+                  <CardContent className="p-4">
+                    <div className="flex items-start justify-between mb-2">
+                      <Badge variant="outline" className="border-sage text-sage text-xs">
+                        {news.category}
+                      </Badge>
+                      <span className="text-xs text-dusty">{news.time}</span>
+                    </div>
+                    <h3 className="text-sm font-semibold text-gunmetal mb-2 leading-tight">
+                      {news.headline}
                     </h3>
-                    <p className="text-gunmetal/80 leading-relaxed">
-                      {event.description}
+                    <p className="text-xs text-gunmetal/80 leading-relaxed">
+                      {news.summary}
                     </p>
                   </CardContent>
                 </Card>
               ))}
+              
+              {/* Recent Events List */}
+              <div className="space-y-4 mt-8">
+                <h3 className="text-lg font-bold text-charcoal font-display">Recent Events</h3>
+                {filteredEvents.slice(0, 3).map((event) => (
+                  <Card 
+                    key={event.id} 
+                    className={`border-0 shadow-sm hover:shadow-md transition-all cursor-pointer ${
+                      selectedRegion === event.region ? 'ring-2 ring-sage' : ''
+                    } ${
+                      event.type === 'positive' 
+                        ? 'bg-gradient-to-br from-sage/10 to-forest/5' 
+                        : 'bg-gradient-to-br from-copper/10 to-gold/5'
+                    }`}
+                    onClick={() => setSelectedRegion(selectedRegion === event.region ? null : event.region)}
+                  >
+                    <CardContent className="p-4">
+                      <div className="flex items-center space-x-2 mb-2">
+                        <div className={`w-3 h-3 rounded-full ${event.type === 'positive' ? 'bg-sage' : 'bg-copper'}`}></div>
+                        <p className="font-semibold text-gunmetal text-sm">{event.region}</p>
+                      </div>
+                      <h4 className="text-sm font-medium text-gunmetal mb-1">
+                        {event.event}
+                      </h4>
+                      <p className="text-xs text-gunmetal/70 leading-relaxed">
+                        {event.description}
+                      </p>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
             </div>
           </div>
         </div>

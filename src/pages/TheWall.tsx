@@ -181,7 +181,7 @@ const TheWall = () => {
               The Wall 🧱
             </h1>
             <p className="text-xl text-gunmetal/90 max-w-2xl mx-auto font-light mb-8">
-              Share your thoughts on monthly prompts in our collaborative space
+              Your voice matters here. Share honest thoughts, challenge perspectives, and build understanding one post at a time.
             </p>
           </div>
 

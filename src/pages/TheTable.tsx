@@ -90,31 +90,31 @@ const TheTable = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 font-sans">
+    <div className="min-h-screen bg-gradient-to-br from-ivory to-pearl font-sans">
       <Header />
       
       <section className="py-16 px-4">
         <div className="container mx-auto max-w-6xl">
           <div className="text-center mb-12">
-            <h1 className="text-5xl md:text-6xl font-bold text-slate-800 mb-6 tracking-tight font-display">
+            <h1 className="text-5xl md:text-6xl font-bold text-charcoal mb-6 tracking-tight font-display">
               The Table 🍽️
             </h1>
-            <p className="text-xl text-slate-700 max-w-2xl mx-auto font-light">
-              Transform any gathering into meaningful connection. Click a seat to unlock conversation starters that spark real dialogue.
+            <p className="text-xl text-gunmetal max-w-2xl mx-auto font-light">
+              Where conversations become connections. Click any seat to discover dialogue starters that bridge generations and perspectives.
             </p>
           </div>
 
           {/* Table Container */}
           <div className="relative mx-auto max-w-4xl h-96 md:h-[500px]">
             {/* Table Surface */}
-            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-40 md:w-80 md:h-52 bg-gradient-to-br from-slate-600 to-slate-700 rounded-full shadow-2xl border-8 border-slate-500">
+            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-40 md:w-80 md:h-52 bg-gradient-to-br from-copper/80 to-gold/70 rounded-full shadow-2xl border-8 border-copper/60">
               {/* Table Grain Effect */}
-              <div className="w-full h-full rounded-full bg-gradient-to-r from-transparent via-slate-500/30 to-transparent"></div>
+              <div className="w-full h-full rounded-full bg-gradient-to-r from-transparent via-gold/30 to-transparent"></div>
               
               {/* Center Button */}
               <Button
                 onClick={handleGoToHowTo}
-                className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-semibold px-6 py-3 rounded-full shadow-lg transition-all duration-300 hover:scale-105"
+                className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-gradient-to-r from-sage to-forest hover:from-forest hover:to-sage text-white font-semibold px-6 py-3 rounded-full shadow-lg transition-all duration-300 hover:scale-105"
               >
                 How To Guide 📚
               </Button>
@@ -125,7 +125,7 @@ const TheTable = () => {
               <button
                 key={seatId}
                 onClick={() => handleSeatClick(seatId)}
-                className="absolute transform -translate-x-1/2 -translate-y-1/2 w-16 h-16 md:w-20 md:h-20 bg-gradient-to-br from-slate-400 to-slate-500 hover:from-slate-500 hover:to-slate-600 rounded-full shadow-lg transition-all duration-300 hover:scale-110 border-4 border-slate-300 flex items-center justify-center group"
+                className="absolute transform -translate-x-1/2 -translate-y-1/2 w-16 h-16 md:w-20 md:h-20 bg-gradient-to-br from-plum/80 to-wine/70 hover:from-wine/90 hover:to-plum/80 rounded-full shadow-lg transition-all duration-300 hover:scale-110 border-4 border-plum/50 flex items-center justify-center group"
                 style={{
                   top: seat.position.top,
                   left: seat.position.left,
@@ -136,7 +136,7 @@ const TheTable = () => {
                 </span>
                 
                 {/* Seat Label */}
-                <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 bg-slate-700 text-white px-2 py-1 rounded text-xs font-semibold whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">
+                <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 bg-charcoal text-white px-2 py-1 rounded text-xs font-semibold whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">
                   {seat.event}
                 </div>
               </button>
@@ -145,21 +145,21 @@ const TheTable = () => {
 
           {/* Dialog for Seat Topics */}
           <Dialog open={selectedSeat !== null} onOpenChange={handleCloseDialog}>
-            <DialogContent className="max-w-md bg-gradient-to-br from-slate-50 to-slate-100 border-slate-200">
+            <DialogContent className="max-w-md bg-gradient-to-br from-ivory to-pearl border-sage/30">
               <DialogHeader>
-                <DialogTitle className="text-2xl text-slate-800 font-display text-center">
+                <DialogTitle className="text-2xl text-charcoal font-display text-center">
                   {selectedSeat && tableSeats[selectedSeat as keyof typeof tableSeats]?.event} 🍽️
                 </DialogTitle>
               </DialogHeader>
               <div className="space-y-4">
-                <p className="text-slate-700 text-center font-medium">
+                <p className="text-gunmetal text-center font-medium">
                   Perfect conversation starters for this occasion:
                 </p>
                 <div className="space-y-3">
                   {selectedSeat && tableSeats[selectedSeat as keyof typeof tableSeats]?.topics.map((topic, index) => (
-                    <Card key={index} className="bg-white/70 border-slate-200 shadow-sm">
+                    <Card key={index} className="bg-white/70 border-sage/30 shadow-sm">
                       <CardContent className="p-4">
-                        <p className="text-slate-800 text-sm leading-relaxed">
+                        <p className="text-charcoal text-sm leading-relaxed">
                           "{topic}"
                         </p>
                       </CardContent>
@@ -169,7 +169,7 @@ const TheTable = () => {
                 <div className="text-center pt-4">
                   <Button
                     onClick={handleGoToHowTo}
-                    className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-2"
+                    className="bg-sage hover:bg-forest text-white font-semibold px-6 py-2"
                   >
                     Learn How To Guide Conversations 📚
                   </Button>
@@ -179,20 +179,20 @@ const TheTable = () => {
           </Dialog>
 
           {/* Guidelines Section */}
-          <Card className="mt-12 bg-gradient-to-br from-slate-100/80 to-slate-200/80 border-slate-300 shadow-lg">
+          <Card className="mt-12 bg-gradient-to-br from-sage/20 to-forest/10 border-sage/30 shadow-lg">
             <CardHeader>
-              <CardTitle className="text-2xl text-slate-800 font-display text-center">
+              <CardTitle className="text-2xl text-charcoal font-display text-center">
                 Creating Meaningful Moments Around The Table
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                  <h4 className="font-semibold text-slate-700 mb-3 flex items-center">
+                  <h4 className="font-semibold text-gunmetal mb-3 flex items-center">
                     <span className="mr-2">✨</span>
                     Do:
                   </h4>
-                  <ul className="space-y-2 text-slate-600">
+                  <ul className="space-y-2 text-gunmetal/80">
                     <li>• Listen to understand, not to respond</li>
                     <li>• Ask follow-up questions</li>
                     <li>• Share personal experiences</li>
@@ -200,11 +200,11 @@ const TheTable = () => {
                   </ul>
                 </div>
                 <div>
-                  <h4 className="font-semibold text-slate-700 mb-3 flex items-center">
+                  <h4 className="font-semibold text-gunmetal mb-3 flex items-center">
                     <span className="mr-2">⚠️</span>
                     Avoid:
                   </h4>
-                  <ul className="space-y-2 text-slate-600">
+                  <ul className="space-y-2 text-gunmetal/80">
                     <li>• Making assumptions</li>
                     <li>• Interrupting or dominating</li>
                     <li>• Using absolute statements</li>
