@@ -152,7 +152,7 @@ const TheScroll = () => {
 
       <ScrollHeader onUpload={handleUpload} />
 
-      <div ref={containerRef} className="scroll-snap-container h-screen overflow-y-scroll relative pt-32">
+      <div ref={containerRef} className="scroll-snap-container h-screen overflow-y-scroll relative">
         {samplePosts.map((post, index) => (
           <VideoPost
             key={post.id}

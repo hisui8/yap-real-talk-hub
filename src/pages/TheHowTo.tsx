@@ -1,9 +1,9 @@
-
 import React, { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
-import { ChevronDown } from 'lucide-react';
+import { ChevronDown, ExternalLink } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 
@@ -118,8 +118,26 @@ const TheHowTo = () => {
             <p className="text-xl text-gunmetal/90 max-w-2xl mx-auto font-light">
               Resources for effective dialogue and conflict resolution to help you navigate challenging conversations
             </p>
+            
+            {/* Credit to Peter Nixon */}
+            <div className="mt-8 p-4 bg-sage/10 rounded-lg border border-sage/20">
+              <p className="text-sm text-gunmetal mb-2">
+                Many of these techniques are inspired by the work of <strong>Peter Nixon</strong>, 
+                a renowned expert in dialogue and conflict resolution.
+              </p>
+              <Button 
+                variant="outline" 
+                size="sm" 
+                className="border-sage text-sage hover:bg-sage hover:text-white"
+                onClick={() => window.open('https://www.ted.com/speakers/peter_nixon', '_blank')}
+              >
+                <ExternalLink className="w-4 h-4 mr-2" />
+                Watch Peter Nixon's TED Talk
+              </Button>
+            </div>
           </div>
 
+          {/* Rest of the component remains the same */}
           <Tabs defaultValue="dialogue" className="w-full">
             <TabsList className="grid w-full grid-cols-3 mb-8 bg-pearl">
               <TabsTrigger value="dialogue" className="data-[state=active]:bg-sage data-[state=active]:text-white">

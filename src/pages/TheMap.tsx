@@ -139,7 +139,7 @@ const TheMap = () => {
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
-            <div className="lg:col-span-3">
+            <div className="lg:col-span-4">
               <InteractiveMap
                 events={filteredEvents}
                 selectedRegion={selectedRegion}
@@ -147,12 +147,45 @@ const TheMap = () => {
               />
             </div>
 
-            <NewsUpdates
-              newsUpdates={newsUpdates}
-              events={filteredEvents}
-              selectedRegion={selectedRegion}
-              onSelectRegion={setSelectedRegion}
-            />
+            <div className="lg:col-span-4">
+              <NewsUpdates
+                newsUpdates={newsUpdates}
+                events={filteredEvents}
+                selectedRegion={selectedRegion}
+                onSelectRegion={setSelectedRegion}
+              />
+            </div>
+          </div>
+
+          {/* Recent Events - Horizontal Layout */}
+          <div className="mt-12">
+            <h3 className="text-2xl font-bold text-charcoal font-display mb-8 text-center">Recent Global Events</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {filteredEvents.slice(0, 6).map((event) => (
+                <div 
+                  key={event.id} 
+                  className={`p-6 rounded-xl shadow-lg hover:shadow-xl transition-all cursor-pointer ${
+                    selectedRegion === event.region ? 'ring-2 ring-sage' : ''
+                  } ${
+                    event.type === 'positive' 
+                      ? 'bg-gradient-to-br from-sage/20 to-forest/10' 
+                      : 'bg-gradient-to-br from-copper/20 to-gold/10'
+                  }`}
+                  onClick={() => setSelectedRegion(selectedRegion === event.region ? null : event.region)}
+                >
+                  <div className="flex items-center space-x-3 mb-3">
+                    <div className={`w-4 h-4 rounded-full ${event.type === 'positive' ? 'bg-sage' : 'bg-copper'}`}></div>
+                    <p className="font-semibold text-gunmetal">{event.region}</p>
+                  </div>
+                  <h4 className="text-lg font-medium text-gunmetal mb-2">
+                    {event.event}
+                  </h4>
+                  <p className="text-sm text-gunmetal/70 leading-relaxed">
+                    {event.description}
+                  </p>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>

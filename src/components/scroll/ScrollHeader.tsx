@@ -10,13 +10,13 @@ interface ScrollHeaderProps {
 
 const ScrollHeader: React.FC<ScrollHeaderProps> = ({ onUpload }) => {
   return (
-    <div className="absolute top-0 left-0 right-0 z-20 bg-gradient-to-b from-black/80 to-transparent">
+    <div className="fixed top-0 left-0 right-0 z-50 bg-gradient-to-b from-black/90 to-black/60 backdrop-blur-sm">
       <Header />
-      <div className="text-center py-8 px-4">
-        <h1 className="text-4xl md:text-5xl font-bold text-white mb-4 tracking-tight font-display">
+      <div className="text-center py-6 px-4">
+        <h1 className="text-3xl md:text-4xl font-bold text-white mb-3 tracking-tight font-display">
           The Scroll 📱
         </h1>
-        <p className="text-lg text-white/90 max-w-2xl mx-auto font-light mb-6">
+        <p className="text-base text-white/90 max-w-xl mx-auto font-light mb-4">
           Watch meaningful conversations unfold. Real voices, real stories, real change - one scroll at a time.
         </p>
         <Button 

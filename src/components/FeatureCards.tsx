@@ -8,7 +8,7 @@ const FeatureCards = () => {
     {
       title: "The Wall",
       path: "/the-wall",
-      description: "Share your thoughts on monthly prompts in our collaborative space",
+      description: "Share anonymous thoughts on monthly prompts. Real voices, unfiltered perspectives, authentic community dialogue.",
       color: "bg-gradient-to-br from-sage to-forest",
       textColor: "text-white",
       icon: "🧱"
@@ -16,7 +16,7 @@ const FeatureCards = () => {
     {
       title: "The Scroll",
       path: "/the-scroll",
-      description: "Fact-checked news, student art, and unbiased content in your feed",
+      description: "Curated conversations that matter. Student voices, fact-checked content, meaningful discourse in short-form.",
       color: "bg-gradient-to-br from-plum to-wine",
       textColor: "text-white", 
       icon: "📜"
@@ -24,7 +24,7 @@ const FeatureCards = () => {
     {
       title: "The Table",
       path: "/the-table",
-      description: "Conversation starters for dinner, holidays, and social gatherings",
+      description: "Break the silence at dinner. Conversation starters that bridge generational gaps and spark understanding.",
       color: "bg-gradient-to-br from-copper to-gold",
       textColor: "text-white",
       icon: "🍽️"
@@ -32,7 +32,7 @@ const FeatureCards = () => {
     {
       title: "The Map",
       path: "/the-map",
-      description: "Interactive world map of positive and negative global events",
+      description: "Your generation's impact, visualized. Track youth movements, social change, and global progress in real-time.",
       color: "bg-gradient-to-br from-charcoal to-gunmetal",
       textColor: "text-white",
       icon: "🗺️"
@@ -40,7 +40,7 @@ const FeatureCards = () => {
     {
       title: "The Shop",
       path: "/the-shop",
-      description: "Trendy merch that sparks meaningful conversations",
+      description: "Wear your values. Conversation-starting merch that funds youth programs and amplifies important messages.",
       color: "bg-gradient-to-br from-pearl to-dusty/50",
       textColor: "text-charcoal",
       icon: "🛍️"
@@ -48,7 +48,7 @@ const FeatureCards = () => {
     {
       title: "The How To",
       path: "/the-how-to",
-      description: "Resources for effective dialogue and conflict resolution",
+      description: "Master difficult conversations. Evidence-based techniques for dialogue, empathy, and positive conflict resolution.",
       color: "bg-gradient-to-br from-ivory to-pearl",
       textColor: "text-gunmetal",
       icon: "📚"
@@ -66,14 +66,14 @@ const FeatureCards = () => {
           {features.map((feature, index) => (
             <Link key={feature.title} to={feature.path} className="block">
               <Card 
-                className={`${feature.color} border-0 shadow-xl hover:shadow-2xl transition-all duration-500 hover:scale-105 cursor-pointer overflow-hidden group rounded-2xl`}
+                className={`${feature.color} border-0 shadow-xl hover:shadow-2xl transition-all duration-500 hover:scale-105 cursor-pointer overflow-hidden group rounded-2xl h-full`}
               >
-                <CardContent className="p-10">
+                <CardContent className="p-10 flex flex-col h-full">
                   <div className="text-5xl mb-6">{feature.icon}</div>
                   <h3 className={`text-2xl font-semibold mb-4 ${feature.textColor} tracking-wide font-display`}>
                     {feature.title}
                   </h3>
-                  <p className={`${feature.textColor} opacity-90 leading-relaxed font-light`}>
+                  <p className={`${feature.textColor} opacity-90 leading-relaxed font-light flex-grow`}>
                     {feature.description}
                   </p>
                 </CardContent>
