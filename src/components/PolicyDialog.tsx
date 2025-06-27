@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
@@ -18,45 +17,48 @@ const PolicyDialog = ({ isOpen, userInitials, setUserInitials, onAgreement, isWa
       <Dialog open={isOpen} onOpenChange={() => {}}>
         <DialogContent className="bg-ivory border-2 border-charcoal/20 max-w-md">
           <DialogHeader>
-            <DialogTitle className="text-xl text-charcoal font-display text-center mb-3">
-              Quick Reminder 💭
+            <DialogTitle className="text-2xl text-charcoal font-display text-center mb-4">
+              Welcome to The Wall! 🗣️
             </DialogTitle>
             <DialogDescription className="sr-only">
               Guidelines for respectful participation on The Wall
             </DialogDescription>
           </DialogHeader>
-          <div className="space-y-4">
-            <div className="bg-sage/20 p-4 rounded-lg text-center">
-              <p className="text-gunmetal font-medium mb-2">
-                These are personal thoughts and conversation starters
-              </p>
-              <p className="text-sm text-gunmetal/80">
-                Engage respectfully with an open mind. Every perspective has value.
+          <div className="space-y-6">
+            <div className="text-center">
+              <div className="text-4xl mb-3">💭</div>
+              <h3 className="text-lg font-semibold text-charcoal mb-2">
+                Real Thoughts, Real Conversations
+              </h3>
+              <p className="text-gunmetal text-sm leading-relaxed">
+                These are personal perspectives and conversation starters from real people. 
+                Every post is someone's honest thoughts on topics that matter.
               </p>
             </div>
             
-            <div className="pt-2">
-              <Input
-                placeholder="Your initials (e.g., J.D.)"
-                value={userInitials}
-                onChange={(e) => setUserInitials(e.target.value)}
-                className="border-dusty/30 focus:border-sage text-center mb-3"
-                maxLength={10}
-              />
-              <Button 
-                onClick={onAgreement}
-                disabled={userInitials.trim().length < 2}
-                className="w-full bg-sage hover:bg-sage/90 text-white disabled:opacity-50"
-              >
-                Got it!
-              </Button>
+            <div className="bg-gradient-to-r from-sage/20 to-forest/20 p-4 rounded-lg border border-sage/30">
+              <div className="flex items-center justify-center space-x-2 mb-2">
+                <span className="text-lg">🤝</span>
+                <span className="font-medium text-charcoal">Engage with Respect</span>
+              </div>
+              <p className="text-sm text-gunmetal/80 text-center">
+                Approach each post with curiosity and an open mind. Every perspective has value.
+              </p>
             </div>
+            
+            <Button 
+              onClick={onAgreement}
+              className="w-full bg-gradient-to-r from-sage to-forest hover:from-sage/90 hover:to-forest/90 text-white font-medium py-3 text-lg shadow-lg"
+            >
+              Let's Go! 🚀
+            </Button>
           </div>
         </DialogContent>
       </Dialog>
     );
   }
 
+  
   return (
     <Dialog open={isOpen} onOpenChange={() => {}}>
       <DialogContent className="bg-ivory border-2 border-charcoal/20 max-w-lg">

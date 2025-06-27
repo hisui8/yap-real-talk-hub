@@ -99,10 +99,8 @@ const TheWall = () => {
   }, []);
 
   const handlePolicyAgreement = () => {
-    if (userInitials.trim().length >= 2) {
-      localStorage.setItem('wall-policy-agreed', 'true');
-      setShowPolicyDialog(false);
-    }
+    localStorage.setItem('wall-policy-agreed', 'true');
+    setShowPolicyDialog(false);
   };
 
   const handleSubmit = (e: React.FormEvent) => {
