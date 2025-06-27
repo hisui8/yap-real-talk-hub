@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import Header from '../components/Header';
@@ -172,6 +171,7 @@ const TheWall = () => {
         userInitials={userInitials}
         setUserInitials={setUserInitials}
         onAgreement={handlePolicyAgreement}
+        isWallSpecific={true}
       />
 
       <section className="py-16 px-4 pb-32">
