@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import Header from '../components/Header';
 import HeroSection from '../components/HeroSection';
 import FeatureCards from '../components/FeatureCards';
+import WhyYapSection from '../components/WhyYapSection';
 import StatsStrip from '../components/StatsStrip';
 import FeaturedContent from '../components/FeaturedContent';
 import Footer from '../components/Footer';
@@ -38,6 +39,7 @@ const Index = () => {
       <Header />
       <HeroSection />
       <FeatureCards />
+      <WhyYapSection />
       <StatsStrip />
       <FeaturedContent />
       <Footer />

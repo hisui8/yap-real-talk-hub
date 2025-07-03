@@ -1,13 +1,16 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
+import { ShoppingBag, Clock, Gift } from 'lucide-react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 
 const TheShop = () => {
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
+  const [showComingSoon, setShowComingSoon] = useState(true);
 
   const products = [
     {
@@ -86,6 +89,60 @@ const TheShop = () => {
   return (
     <div className="min-h-screen bg-ivory font-sans">
       <Header />
+      
+      {/* Coming Soon Dialog */}
+      <Dialog open={showComingSoon} onOpenChange={setShowComingSoon}>
+        <DialogContent className="bg-ivory border-2 border-charcoal/20 max-w-md">
+          <DialogHeader>
+            <DialogTitle className="text-2xl text-charcoal font-display text-center mb-4">
+              The Shop Coming Soon! 🚀
+            </DialogTitle>
+            <DialogDescription className="sr-only">
+              Shop launch announcement
+            </DialogDescription>
+          </DialogHeader>
+          <div className="space-y-6 text-center">
+            <div className="text-6xl mb-4">🛍️</div>
+            
+            <div className="space-y-3">
+              <h3 className="text-lg font-semibold text-charcoal">
+                We're building something special
+              </h3>
+              <p className="text-gunmetal text-sm leading-relaxed">
+                Our conversation-starting merchandise is almost ready! Get excited for:
+              </p>
+            </div>
+            
+            <div className="grid grid-cols-1 gap-3">
+              <div className="bg-sage/10 p-3 rounded-lg border border-sage/20 flex items-center space-x-3">
+                <Gift className="w-5 h-5 text-sage" />
+                <span className="text-sm text-gunmetal">Apparel that sparks dialogue</span>
+              </div>
+              <div className="bg-copper/10 p-3 rounded-lg border border-copper/20 flex items-center space-x-3">
+                <ShoppingBag className="w-5 h-5 text-copper" />
+                <span className="text-sm text-gunmetal">Accessories with purpose</span>
+              </div>
+              <div className="bg-plum/10 p-3 rounded-lg border border-plum/20 flex items-center space-x-3">
+                <Clock className="w-5 h-5 text-plum" />
+                <span className="text-sm text-gunmetal">Limited edition collections</span>
+              </div>
+            </div>
+            
+            <div className="bg-gradient-to-r from-sage/20 to-forest/20 p-4 rounded-lg border border-sage/30">
+              <p className="text-sm text-gunmetal/80 mb-3">
+                🌱 Every purchase will support youth dialogue programs
+              </p>
+            </div>
+            
+            <Button 
+              onClick={() => setShowComingSoon(false)}
+              className="w-full bg-gradient-to-r from-sage to-forest hover:from-sage/90 hover:to-forest/90 text-white font-medium py-3 text-lg shadow-lg"
+            >
+              Can't Wait! 🎉
+            </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
       
       <section className="py-16 px-4">
         <div className="container mx-auto max-w-7xl">
