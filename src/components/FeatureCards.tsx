@@ -6,6 +6,14 @@ import { Link } from 'react-router-dom';
 const FeatureCards = () => {
   const features = [
     {
+      title: "The How To",
+      path: "/the-how-to",
+      description: "Master difficult conversations. Evidence-based techniques for dialogue, empathy, and positive conflict resolution.",
+      color: "bg-gradient-to-br from-ivory to-pearl",
+      textColor: "text-gunmetal",
+      icon: "📚"
+    },
+    {
       title: "The Wall",
       path: "/the-wall",
       description: "Share anonymous thoughts on monthly prompts. Real voices, unfiltered perspectives, authentic community dialogue.",
@@ -44,14 +52,6 @@ const FeatureCards = () => {
       color: "bg-gradient-to-br from-pearl to-dusty/50",
       textColor: "text-charcoal",
       icon: "🛍️"
-    },
-    {
-      title: "The How To",
-      path: "/the-how-to",
-      description: "Master difficult conversations. Evidence-based techniques for dialogue, empathy, and positive conflict resolution.",
-      color: "bg-gradient-to-br from-ivory to-pearl",
-      textColor: "text-gunmetal",
-      icon: "📚"
     }
   ];
 

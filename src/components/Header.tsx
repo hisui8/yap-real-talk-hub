@@ -7,12 +7,12 @@ const Header = () => {
   const location = useLocation();
   
   const navItems = [
+    { name: 'The How To', path: '/the-how-to' },
     { name: 'The Wall', path: '/the-wall' },
     { name: 'The Scroll', path: '/the-scroll' }, 
     { name: 'The Table', path: '/the-table' },
     { name: 'The Map', path: '/the-map' },
-    { name: 'The Shop', path: '/the-shop' },
-    { name: 'The How To', path: '/the-how-to' }
+    { name: 'The Shop', path: '/the-shop' }
   ];
 
   return (
