@@ -207,9 +207,12 @@ const TheHowTo = () => {
 
           {/* Rest of the component remains the same */}
           <Tabs defaultValue="dialogue" className="w-full">
-            <TabsList className="grid w-full grid-cols-3 mb-8 bg-pearl">
+            <TabsList className="grid w-full grid-cols-4 mb-8 bg-pearl">
               <TabsTrigger value="dialogue" className="data-[state=active]:bg-sage data-[state=active]:text-white">
                 Dialogue Skills
+              </TabsTrigger>
+              <TabsTrigger value="nixon" className="data-[state=active]:bg-sage data-[state=active]:text-white">
+                Nixon's Model
               </TabsTrigger>
               <TabsTrigger value="conflict" className="data-[state=active]:bg-sage data-[state=active]:text-white">
                 Conflict Resolution
@@ -278,6 +281,271 @@ const TheHowTo = () => {
                     </Collapsible>
                   </Card>
                 ))}
+              </div>
+            </TabsContent>
+
+            <TabsContent value="nixon">
+              <div className="space-y-8">
+                {/* Header Section */}
+                <Card className="bg-gradient-to-br from-forest/20 to-sage/10 border-0 shadow-lg">
+                  <CardHeader className="text-center">
+                    <CardTitle className="text-3xl text-charcoal font-display mb-4">
+                      🧠 Peter Nixon's 4-Role Dialogue Model
+                    </CardTitle>
+                    <p className="text-gunmetal/90 max-w-3xl mx-auto">
+                      Create healthier, more intentional conversations by using Nixon's proven framework 
+                      that keeps dialogue balanced and purposeful. These roles ensure every voice is heard 
+                      and every perspective is valued.
+                    </p>
+                  </CardHeader>
+                </Card>
+
+                {/* The 4 Roles */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  {[
+                    {
+                      role: 'Mover',
+                      icon: '🚀',
+                      description: 'Introduces ideas or direction',
+                      examples: [
+                        '"What if we tried approaching this differently?"',
+                        '"I think we should consider..."',
+                        '"Here\'s a perspective we haven\'t explored..."'
+                      ],
+                      usage: 'Perfect for starting conversations or suggesting new directions',
+                      color: 'from-blue-100 to-blue-50 border-blue-200'
+                    },
+                    {
+                      role: 'Follower',
+                      icon: '🤝',
+                      description: 'Supports or expands on ideas',
+                      examples: [
+                        '"That\'s a great point, and it reminds me of..."',
+                        '"Building on what you said..."',
+                        '"Yes, and we could also consider..."'
+                      ],
+                      usage: 'Essential for building momentum and showing agreement',
+                      color: 'from-green-100 to-green-50 border-green-200'
+                    },
+                    {
+                      role: 'Opposer',
+                      icon: '🤔',
+                      description: 'Challenges or refines thoughtfully',
+                      examples: [
+                        '"I see it differently because..."',
+                        '"What about the people who might be affected by..."',
+                        '"Have we considered the potential drawbacks?"'
+                      ],
+                      usage: 'Crucial for testing ideas and preventing groupthink',
+                      color: 'from-orange-100 to-orange-50 border-orange-200'
+                    },
+                    {
+                      role: 'Bystander',
+                      icon: '👁️',
+                      description: 'Reflects or observes the process',
+                      examples: [
+                        '"I notice we keep coming back to..."',
+                        '"It seems like we\'re stuck on this point..."',
+                        '"What I\'m hearing from everyone is..."'
+                      ],
+                      usage: 'Helps maintain perspective and process awareness',
+                      color: 'from-purple-100 to-purple-50 border-purple-200'
+                    }
+                  ].map((roleData) => (
+                    <Card key={roleData.role} className={`bg-gradient-to-br ${roleData.color} border-0 shadow-lg hover-scale`}>
+                      <CardHeader>
+                        <div className="flex items-center space-x-3 mb-3">
+                          <span className="text-3xl">{roleData.icon}</span>
+                          <CardTitle className="text-xl text-gunmetal font-display">
+                            {roleData.role}
+                          </CardTitle>
+                        </div>
+                        <p className="text-gunmetal/80 font-medium">{roleData.description}</p>
+                      </CardHeader>
+                      <CardContent>
+                        <div className="space-y-4">
+                          <div>
+                            <h4 className="font-semibold text-gunmetal mb-2">💬 Example Phrases:</h4>
+                            <ul className="space-y-1">
+                              {roleData.examples.map((example, index) => (
+                                <li key={index} className="text-sm text-gunmetal/90 italic">
+                                  {example}
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                          <div className="bg-white/50 p-3 rounded-lg">
+                            <h4 className="font-semibold text-gunmetal mb-1 text-xs">WHEN TO USE:</h4>
+                            <p className="text-xs text-gunmetal/80">{roleData.usage}</p>
+                          </div>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  ))}
+                </div>
+
+                {/* Implementation for YAP */}
+                <Card className="bg-gradient-to-br from-copper/20 to-gold/10 border-0 shadow-lg">
+                  <CardHeader>
+                    <CardTitle className="text-2xl text-gunmetal font-display">
+                      🛠️ How YAP Will Use This Model
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-6">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <div className="space-y-4">
+                        <h3 className="font-semibold text-gunmetal mb-3">A. Education Component</h3>
+                        <div className="bg-ivory/50 p-4 rounded-lg space-y-2">
+                          <div className="flex items-center space-x-2">
+                            <span className="w-2 h-2 bg-sage rounded-full"></span>
+                            <span className="text-sm text-gunmetal">Interactive role explanations with youth-friendly examples</span>
+                          </div>
+                          <div className="flex items-center space-x-2">
+                            <span className="w-2 h-2 bg-sage rounded-full"></span>
+                            <span className="text-sm text-gunmetal">Quick tutorials before joining conversations</span>
+                          </div>
+                          <div className="flex items-center space-x-2">
+                            <span className="w-2 h-2 bg-sage rounded-full"></span>
+                            <span className="text-sm text-gunmetal">Visual icons and empowering, non-academic tone</span>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="space-y-4">
+                        <h3 className="font-semibold text-gunmetal mb-3">B. Role-Based Templates</h3>
+                        <div className="bg-ivory/50 p-4 rounded-lg space-y-2">
+                          <div className="flex items-center space-x-2">
+                            <span className="w-2 h-2 bg-forest rounded-full"></span>
+                            <span className="text-sm text-gunmetal">"As a Mover, what's your suggestion?"</span>
+                          </div>
+                          <div className="flex items-center space-x-2">
+                            <span className="w-2 h-2 bg-forest rounded-full"></span>
+                            <span className="text-sm text-gunmetal">"As an Opposer, how would you respectfully challenge this?"</span>
+                          </div>
+                          <div className="flex items-center space-x-2">
+                            <span className="w-2 h-2 bg-forest rounded-full"></span>
+                            <span className="text-sm text-gunmetal">Optional but encouraged through design cues</span>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="space-y-4">
+                        <h3 className="font-semibold text-gunmetal mb-3">C. AI-Powered Suggestions</h3>
+                        <div className="bg-ivory/50 p-4 rounded-lg space-y-2">
+                          <div className="flex items-center space-x-2">
+                            <span className="w-2 h-2 bg-copper rounded-full"></span>
+                            <span className="text-sm text-gunmetal">"Try replying as a Follower: What could you add?"</span>
+                          </div>
+                          <div className="flex items-center space-x-2">
+                            <span className="w-2 h-2 bg-copper rounded-full"></span>
+                            <span className="text-sm text-gunmetal">"Take a Bystander role—what's the bigger picture?"</span>
+                          </div>
+                          <div className="flex items-center space-x-2">
+                            <span className="w-2 h-2 bg-copper rounded-full"></span>
+                            <span className="text-sm text-gunmetal">Gentle, contextual guidance during conversations</span>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="space-y-4">
+                        <h3 className="font-semibold text-gunmetal mb-3">D. Visual Feedback</h3>
+                        <div className="bg-ivory/50 p-4 rounded-lg space-y-2">
+                          <div className="flex items-center space-x-2">
+                            <span className="w-2 h-2 bg-plum rounded-full"></span>
+                            <span className="text-sm text-gunmetal">Role usage badges (e.g., "Dialogue Balancer")</span>
+                          </div>
+                          <div className="flex items-center space-x-2">
+                            <span className="w-2 h-2 bg-plum rounded-full"></span>
+                            <span className="text-sm text-gunmetal">Thread balance tracker showing role distribution</span>
+                          </div>
+                          <div className="flex items-center space-x-2">
+                            <span className="w-2 h-2 bg-plum rounded-full"></span>
+                            <span className="text-sm text-gunmetal">Gamification encouraging balanced participation</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                {/* Example in Action */}
+                <Card className="bg-gradient-to-br from-plum/20 to-wine/10 border-0 shadow-lg">
+                  <CardHeader>
+                    <CardTitle className="text-2xl text-gunmetal font-display">
+                      💬 Nixon's Model in Action: Climate Change Discussion
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="space-y-4">
+                      <div className="bg-blue-50 border-l-4 border-blue-300 p-4 rounded-r-lg">
+                        <div className="flex items-center mb-2">
+                          <span className="text-xl mr-2">🚀</span>
+                          <span className="font-semibold text-blue-700">Alex (Mover):</span>
+                        </div>
+                        <p className="text-gunmetal italic">
+                          "I think we should focus on practical solutions young people can actually implement. 
+                          What if we created a campus initiative for reducing waste?"
+                        </p>
+                      </div>
+
+                      <div className="bg-green-50 border-l-4 border-green-300 p-4 rounded-r-lg">
+                        <div className="flex items-center mb-2">
+                          <span className="text-xl mr-2">🤝</span>
+                          <span className="font-semibold text-green-700">Sam (Follower):</span>
+                        </div>
+                        <p className="text-gunmetal italic">
+                          "Yes, and we could partner with local businesses for composting programs. 
+                          My dorm already started something similar and it's been really effective."
+                        </p>
+                      </div>
+
+                      <div className="bg-orange-50 border-l-4 border-orange-300 p-4 rounded-r-lg">
+                        <div className="flex items-center mb-2">
+                          <span className="text-xl mr-2">🤔</span>
+                          <span className="font-semibold text-orange-700">Jordan (Opposer):</span>
+                        </div>
+                        <p className="text-gunmetal italic">
+                          "I appreciate the enthusiasm, but are we missing the bigger picture? 
+                          Individual actions matter, but shouldn't we also be advocating for policy changes?"
+                        </p>
+                      </div>
+
+                      <div className="bg-purple-50 border-l-4 border-purple-300 p-4 rounded-r-lg">
+                        <div className="flex items-center mb-2">
+                          <span className="text-xl mr-2">👁️</span>
+                          <span className="font-semibold text-purple-700">Casey (Bystander):</span>
+                        </div>
+                        <p className="text-gunmetal italic">
+                          "I notice we're exploring both individual and systemic approaches. 
+                          It seems like we all care about making real impact - maybe we can do both?"
+                        </p>
+                      </div>
+
+                      <div className="bg-sage/10 p-4 rounded-lg border border-sage/20 mt-4">
+                        <h4 className="font-semibold text-sage mb-2">🎯 Why This Works:</h4>
+                        <p className="text-gunmetal/90 text-sm">
+                          Each person played their role authentically, creating a balanced conversation where 
+                          ideas were proposed, supported, challenged, and synthesized. No single voice dominated, 
+                          and the Bystander helped the group see the bigger picture and find common ground.
+                        </p>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                {/* Goal Section */}
+                <Card className="bg-gradient-to-br from-sage/20 to-forest/10 border-0 shadow-lg">
+                  <CardContent className="p-8 text-center">
+                    <h3 className="text-xl font-semibold text-charcoal mb-4 font-display">
+                      🧭 Our Goal: Better Conversation by Design
+                    </h3>
+                    <p className="text-gunmetal/90 max-w-3xl mx-auto">
+                      YAP isn't just a space for conversation—it's a <strong>guided environment</strong> for better conversation. 
+                      By integrating Nixon's model, users learn by doing and gradually shift how they communicate online, 
+                      creating ripple effects that extend far beyond our platform.
+                    </p>
+                  </CardContent>
+                </Card>
               </div>
             </TabsContent>
 
