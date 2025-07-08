@@ -286,6 +286,30 @@ const TheHowTo = () => {
 
             <TabsContent value="nixon">
               <div className="space-y-8">
+                {/* Quick BRIDGE Method */}
+                <Card className="bg-gradient-to-r from-sage/20 to-forest/10 border-0 shadow-lg">
+                  <CardContent className="p-6">
+                    <div className="flex items-center justify-center space-x-8">
+                      {[
+                        { letter: 'B', word: 'Breathe', tip: 'Pause before responding' },
+                        { letter: 'R', word: 'Reflect', tip: 'Mirror what you heard' },
+                        { letter: 'I', word: 'Inquire', tip: 'Ask genuine questions' },
+                        { letter: 'D', word: 'Dialogue', tip: 'Share your view' },
+                        { letter: 'G', word: 'Grace', tip: 'Stay kind & patient' },
+                        { letter: 'E', word: 'Evolve', tip: 'Be open to change' }
+                      ].map((item) => (
+                        <div key={item.letter} className="text-center">
+                          <div className="bg-sage text-white rounded-full w-10 h-10 flex items-center justify-center text-lg font-bold mx-auto mb-2">
+                            {item.letter}
+                          </div>
+                          <h4 className="font-semibold text-gunmetal text-sm mb-1">{item.word}</h4>
+                          <p className="text-xs text-gunmetal/70">{item.tip}</p>
+                        </div>
+                      ))}
+                    </div>
+                  </CardContent>
+                </Card>
+
                 {/* Header Section */}
                 <Card className="bg-gradient-to-br from-forest/20 to-sage/10 border-0 shadow-lg">
                   <CardHeader className="text-center">
@@ -551,6 +575,29 @@ const TheHowTo = () => {
 
             <TabsContent value="conflict">
               <div className="space-y-6">
+                {/* Quick BRIDGE Method */}
+                <Card className="bg-gradient-to-r from-sage/20 to-forest/10 border-0 shadow-lg">
+                  <CardContent className="p-6">
+                    <div className="flex items-center justify-center space-x-8">
+                      {[
+                        { letter: 'B', word: 'Breathe', tip: 'Pause before responding' },
+                        { letter: 'R', word: 'Reflect', tip: 'Mirror what you heard' },
+                        { letter: 'I', word: 'Inquire', tip: 'Ask genuine questions' },
+                        { letter: 'D', word: 'Dialogue', tip: 'Share your view' },
+                        { letter: 'G', word: 'Grace', tip: 'Stay kind & patient' },
+                        { letter: 'E', word: 'Evolve', tip: 'Be open to change' }
+                      ].map((item) => (
+                        <div key={item.letter} className="text-center">
+                          <div className="bg-sage text-white rounded-full w-10 h-10 flex items-center justify-center text-lg font-bold mx-auto mb-2">
+                            {item.letter}
+                          </div>
+                          <h4 className="font-semibold text-gunmetal text-sm mb-1">{item.word}</h4>
+                          <p className="text-xs text-gunmetal/70">{item.tip}</p>
+                        </div>
+                      ))}
+                    </div>
+                  </CardContent>
+                </Card>
                 {conflictResolution.map((section) => (
                   <Card key={section.id} className="bg-gradient-to-br from-copper/20 to-gold/10 border-0 shadow-lg">
                     <CardHeader>
@@ -579,6 +626,29 @@ const TheHowTo = () => {
 
             <TabsContent value="scenarios">
               <div className="space-y-6">
+                {/* Quick BRIDGE Method */}
+                <Card className="bg-gradient-to-r from-sage/20 to-forest/10 border-0 shadow-lg">
+                  <CardContent className="p-6">
+                    <div className="flex items-center justify-center space-x-8">
+                      {[
+                        { letter: 'B', word: 'Breathe', tip: 'Pause before responding' },
+                        { letter: 'R', word: 'Reflect', tip: 'Mirror what you heard' },
+                        { letter: 'I', word: 'Inquire', tip: 'Ask genuine questions' },
+                        { letter: 'D', word: 'Dialogue', tip: 'Share your view' },
+                        { letter: 'G', word: 'Grace', tip: 'Stay kind & patient' },
+                        { letter: 'E', word: 'Evolve', tip: 'Be open to change' }
+                      ].map((item) => (
+                        <div key={item.letter} className="text-center">
+                          <div className="bg-sage text-white rounded-full w-10 h-10 flex items-center justify-center text-lg font-bold mx-auto mb-2">
+                            {item.letter}
+                          </div>
+                          <h4 className="font-semibold text-gunmetal text-sm mb-1">{item.word}</h4>
+                          <p className="text-xs text-gunmetal/70">{item.tip}</p>
+                        </div>
+                      ))}
+                    </div>
+                  </CardContent>
+                </Card>
                 {practicalScenarios.map((scenario, index) => (
                   <Card key={index} className="bg-gradient-to-br from-plum/20 to-wine/10 border-0 shadow-lg hover-scale">
                     <CardContent className="p-6">
@@ -636,34 +706,6 @@ const TheHowTo = () => {
             </TabsContent>
           </Tabs>
 
-          {/* Quick Reference Card */}
-          <Card className="mt-12 bg-gradient-to-br from-sage/20 to-forest/10 border-0 shadow-lg">
-            <CardHeader>
-              <CardTitle className="text-2xl text-charcoal font-display text-center">
-                Quick Reference: The BRIDGE Method
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {[
-                  { letter: 'B', word: 'Breathe', tip: 'Take a moment before responding' },
-                  { letter: 'R', word: 'Reflect', tip: 'Mirror back what you heard' },
-                  { letter: 'I', word: 'Inquire', tip: 'Ask genuine questions' },
-                  { letter: 'D', word: 'Dialogue', tip: 'Share your perspective' },
-                  { letter: 'G', word: 'Grace', tip: 'Extend kindness and patience' },
-                  { letter: 'E', word: 'Evolve', tip: 'Be open to changing your mind' }
-                ].map((item) => (
-                  <div key={item.letter} className="text-center">
-                    <div className="bg-sage text-white rounded-full w-12 h-12 flex items-center justify-center text-xl font-bold mx-auto mb-3">
-                      {item.letter}
-                    </div>
-                    <h4 className="font-semibold text-gunmetal mb-2">{item.word}</h4>
-                    <p className="text-sm text-gunmetal/80">{item.tip}</p>
-                  </div>
-                ))}
-              </div>
-            </CardContent>
-          </Card>
         </div>
       </section>
 
