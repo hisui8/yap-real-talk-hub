@@ -38,8 +38,8 @@ const Index = () => {
       
       <Header />
       <HeroSection />
-      <FeatureCards />
       <WhyYapSection />
+      <FeatureCards />
       <StatsStrip />
       <FeaturedContent />
       <Footer />
