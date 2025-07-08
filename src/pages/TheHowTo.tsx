@@ -281,6 +281,74 @@ const TheHowTo = () => {
                     </Collapsible>
                   </Card>
                 ))}
+                
+                {/* Detailed BRIDGE Method Reference */}
+                <Card className="bg-gradient-to-r from-sage/20 to-forest/10 border-0 shadow-lg mt-8">
+                  <CardHeader>
+                    <CardTitle className="text-2xl text-charcoal font-display text-center">
+                      🌉 The BRIDGE Method - Complete Reference
+                    </CardTitle>
+                    <p className="text-center text-gunmetal/80">
+                      A comprehensive framework for navigating difficult conversations with grace and intention
+                    </p>
+                  </CardHeader>
+                  <CardContent className="p-6">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                      {[
+                        { 
+                          letter: 'B', 
+                          word: 'Breathe', 
+                          description: 'Take a moment to center yourself before responding. This prevents reactive responses and creates space for thoughtful dialogue.',
+                          example: 'Count to three, take a deep breath, and ask yourself: "What response will move this conversation forward?"'
+                        },
+                        { 
+                          letter: 'R', 
+                          word: 'Reflect', 
+                          description: 'Mirror back what you heard to ensure understanding. This shows respect and often defuses tension immediately.',
+                          example: '"What I hear you saying is that you\'re concerned about..." or "It sounds like this is really important to you because..."'
+                        },
+                        { 
+                          letter: 'I', 
+                          word: 'Inquire', 
+                          description: 'Ask genuine questions to understand their perspective better. Curiosity is more powerful than being right.',
+                          example: '"Can you help me understand what led you to that conclusion?" or "What would need to change for you to feel differently?"'
+                        },
+                        { 
+                          letter: 'D', 
+                          word: 'Dialogue', 
+                          description: 'Share your own perspective respectfully, using "I" statements and acknowledging their valid points.',
+                          example: '"I see it differently because of my experience with... and I appreciate your point about..." '
+                        },
+                        { 
+                          letter: 'G', 
+                          word: 'Grace', 
+                          description: 'Maintain kindness and patience even when challenged. Remember the person behind the opinion.',
+                          example: 'Stay calm when they get heated, acknowledge their emotions, and keep your tone respectful throughout.'
+                        },
+                        { 
+                          letter: 'E', 
+                          word: 'Evolve', 
+                          description: 'Be genuinely open to changing your mind or finding new solutions together. Growth requires flexibility.',
+                          example: '"You\'ve given me something new to think about" or "Maybe there\'s a third option we haven\'t considered..."'
+                        }
+                      ].map((item) => (
+                        <div key={item.letter} className="bg-ivory/50 p-4 rounded-lg">
+                          <div className="flex items-center mb-3">
+                            <div className="bg-sage text-white rounded-full w-10 h-10 flex items-center justify-center text-lg font-bold mr-3">
+                              {item.letter}
+                            </div>
+                            <h4 className="font-semibold text-gunmetal text-lg">{item.word}</h4>
+                          </div>
+                          <p className="text-gunmetal/80 text-sm mb-3 leading-relaxed">{item.description}</p>
+                          <div className="bg-sage/10 p-3 rounded border border-sage/20">
+                            <p className="text-xs text-gunmetal/90 font-medium">💡 Example:</p>
+                            <p className="text-xs text-gunmetal/80 italic mt-1">{item.example}</p>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </CardContent>
+                </Card>
               </div>
             </TabsContent>
 
