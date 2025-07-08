@@ -12,6 +12,7 @@ interface Comment {
   author: string;
   content: string;
   timestamp: string;
+  type: 'perspective' | 'question' | 'fact' | 'support' | 'challenge';
 }
 
 interface Post {
@@ -75,6 +76,7 @@ const TheWall = () => {
   const [selectedPost, setSelectedPost] = useState<Post | null>(null);
   const [newComment, setNewComment] = useState('');
   const [commentAuthor, setCommentAuthor] = useState('');
+  const [commentType, setCommentType] = useState<'perspective' | 'question' | 'fact' | 'support' | 'challenge'>('perspective');
   const [isCommentDialogOpen, setIsCommentDialogOpen] = useState(false);
   const [showPolicyDialog, setShowPolicyDialog] = useState(true);
   const [userInitials, setUserInitials] = useState('');
@@ -144,7 +146,8 @@ const TheWall = () => {
         id: Date.now(),
         author: commentAuthor,
         content: newComment,
-        timestamp: new Date().toLocaleTimeString()
+        timestamp: new Date().toLocaleTimeString(),
+        type: commentType
       };
       
       setPosts(posts.map(post => 
@@ -230,6 +233,8 @@ const TheWall = () => {
         setNewComment={setNewComment}
         commentAuthor={commentAuthor}
         setCommentAuthor={setCommentAuthor}
+        commentType={commentType}
+        setCommentType={setCommentType}
         onSubmit={handleCommentSubmit}
       />
 
