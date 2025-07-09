@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { MessageCircle, HelpCircle, FileText, Heart, AlertCircle } from 'lucide-react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import PolicyDialog from '../components/PolicyDialog';
@@ -187,13 +188,44 @@ const TheWall = () => {
           </div>
 
           {/* Current Prompt */}
-          <div className="mb-12">
+          <div className="mb-8">
             <Card className="bg-gradient-to-br from-sage/20 to-forest/10 border-2 border-sage/30 shadow-xl">
               <CardHeader className="text-center pb-4">
                 <CardTitle className="text-3xl text-charcoal font-display">This Month's Prompt</CardTitle>
               </CardHeader>
               <CardContent className="text-center">
                 <p className="text-2xl text-gunmetal font-medium leading-relaxed">{currentPrompt}</p>
+              </CardContent>
+            </Card>
+          </div>
+
+          {/* Comment Type Key */}
+          <div className="mb-12">
+            <Card className="bg-gradient-to-r from-dusty/20 to-pearl/30 border border-sage/20">
+              <CardContent className="p-4">
+                <h3 className="text-lg font-semibold text-charcoal mb-3 text-center">Comment Color Guide</h3>
+                <div className="grid grid-cols-2 md:grid-cols-5 gap-3 text-sm">
+                  <div className="flex items-center space-x-2 bg-blue-50/80 p-2 rounded border-l-4 border-blue-400">
+                    <MessageCircle className="w-4 h-4 text-blue-600" />
+                    <span className="text-gunmetal font-medium">Personal Opinion</span>
+                  </div>
+                  <div className="flex items-center space-x-2 bg-purple-50/80 p-2 rounded border-l-4 border-purple-400">
+                    <HelpCircle className="w-4 h-4 text-purple-600" />
+                    <span className="text-gunmetal font-medium">Question</span>
+                  </div>
+                  <div className="flex items-center space-x-2 bg-green-50/80 p-2 rounded border-l-4 border-green-400">
+                    <FileText className="w-4 h-4 text-green-600" />
+                    <span className="text-gunmetal font-medium">Fact/Data</span>
+                  </div>
+                  <div className="flex items-center space-x-2 bg-emerald-50/80 p-2 rounded border-l-4 border-emerald-400">
+                    <Heart className="w-4 h-4 text-emerald-600" />
+                    <span className="text-gunmetal font-medium">Support</span>
+                  </div>
+                  <div className="flex items-center space-x-2 bg-orange-50/80 p-2 rounded border-l-4 border-orange-400">
+                    <AlertCircle className="w-4 h-4 text-orange-600" />
+                    <span className="text-gunmetal font-medium">Challenge</span>
+                  </div>
+                </div>
               </CardContent>
             </Card>
           </div>
