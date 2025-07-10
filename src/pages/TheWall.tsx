@@ -202,27 +202,27 @@ const TheWall = () => {
           {/* Comment Type Key */}
           <div className="mb-12">
             <Card className="bg-gradient-to-r from-dusty/20 to-pearl/30 border border-sage/20">
-              <CardContent className="p-4">
-                <h3 className="text-lg font-semibold text-charcoal mb-3 text-center">Comment Color Guide</h3>
-                <div className="grid grid-cols-2 md:grid-cols-5 gap-3 text-sm">
-                  <div className="flex items-center space-x-2 bg-blue-50/80 p-2 rounded border-l-4 border-blue-400">
-                    <MessageCircle className="w-4 h-4 text-blue-600" />
+              <CardContent className="p-3">
+                <h3 className="text-sm font-semibold text-charcoal mb-2 text-center">Comment Color Guide</h3>
+                <div className="grid grid-cols-2 md:grid-cols-5 gap-2 text-xs">
+                  <div className="flex items-center space-x-1 bg-blue-50/80 p-1.5 rounded border-l-2 border-blue-400">
+                    <MessageCircle className="w-3 h-3 text-blue-600" />
                     <span className="text-gunmetal font-medium">Personal Opinion</span>
                   </div>
-                  <div className="flex items-center space-x-2 bg-purple-50/80 p-2 rounded border-l-4 border-purple-400">
-                    <HelpCircle className="w-4 h-4 text-purple-600" />
+                  <div className="flex items-center space-x-1 bg-purple-50/80 p-1.5 rounded border-l-2 border-purple-400">
+                    <HelpCircle className="w-3 h-3 text-purple-600" />
                     <span className="text-gunmetal font-medium">Question</span>
                   </div>
-                  <div className="flex items-center space-x-2 bg-green-50/80 p-2 rounded border-l-4 border-green-400">
-                    <FileText className="w-4 h-4 text-green-600" />
+                  <div className="flex items-center space-x-1 bg-green-50/80 p-1.5 rounded border-l-2 border-green-400">
+                    <FileText className="w-3 h-3 text-green-600" />
                     <span className="text-gunmetal font-medium">Fact/Data</span>
                   </div>
-                  <div className="flex items-center space-x-2 bg-emerald-50/80 p-2 rounded border-l-4 border-emerald-400">
-                    <Heart className="w-4 h-4 text-emerald-600" />
+                  <div className="flex items-center space-x-1 bg-emerald-50/80 p-1.5 rounded border-l-2 border-emerald-400">
+                    <Heart className="w-3 h-3 text-emerald-600" />
                     <span className="text-gunmetal font-medium">Support</span>
                   </div>
-                  <div className="flex items-center space-x-2 bg-orange-50/80 p-2 rounded border-l-4 border-orange-400">
-                    <AlertCircle className="w-4 h-4 text-orange-600" />
+                  <div className="flex items-center space-x-1 bg-orange-50/80 p-1.5 rounded border-l-2 border-orange-400">
+                    <AlertCircle className="w-3 h-3 text-orange-600" />
                     <span className="text-gunmetal font-medium">Challenge</span>
                   </div>
                 </div>
