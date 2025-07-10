@@ -182,9 +182,8 @@ const TheHowTo = () => {
             <h1 className="text-5xl md:text-6xl font-bold text-charcoal mb-6 tracking-tight font-display">
               The How To 📚
             </h1>
-            <p className="text-xl text-gunmetal/90 max-w-3xl mx-auto font-light">
-              Master the art of difficult conversations with evidence-based techniques that transform conflict into understanding. 
-              See real dialogue examples and learn when each method creates the biggest impact.
+            <p className="text-xl text-gunmetal/90 max-w-2xl mx-auto font-light">
+              Turn arguments into breakthroughs. Learn proven dialogue techniques with real examples that actually work.
             </p>
             
             {/* Credit to Peter Nixon */}
