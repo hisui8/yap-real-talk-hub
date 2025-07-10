@@ -15,7 +15,7 @@ const HeroSection = () => {
 
         {/* Subtitle */}
         <p className="text-xl md:text-2xl text-gunmetal/90 mb-12 max-w-2xl mx-auto leading-relaxed font-light">
-          Join the conversation that's changing the world. Where thoughtful voices create meaningful dialogue and drive authentic change.
+          Where young voices break the noise. Real conversations. Real impact. No BS.
         </p>
 
         {/* CTA Buttons */}
