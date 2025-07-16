@@ -68,7 +68,7 @@ const WhyYapSection = () => {
             </p>
             <div className="bg-white/30 rounded-lg p-6 mt-8">
               <p className="text-2xl font-bold text-charcoal font-display">
-                Let's talk better, not louder. Let's create dialogue that helps us grow, not divide.
+                Let's talk better, not louder. Let's create dialogue that helps us grow, not divide. Break through the noise.
               </p>
             </div>
           </div>
