@@ -29,7 +29,7 @@ const WhyYapSection = () => {
           </h2>
           <div className="max-w-4xl mx-auto space-y-6 text-lg text-gunmetal/90 leading-relaxed">
             <p>
-              <strong className="text-charcoal">YAP (Youth, Articulation, Perspective)</strong> exists to spark meaningful, grounded conversations among young people—the future shapers of our world.
+              <strong className="text-charcoal">YAP (Young Scholars, Articulation, Perspective)</strong> exists to spark meaningful, grounded conversations among young people—the future shapers of our world.
             </p>
             <p>
               We're living in a time where social media often amplifies noise over nuance. It's easy to fall into cycles of conformity, conflict, or shallow communication. YAP is here to break that cycle.
