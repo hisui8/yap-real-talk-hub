@@ -7,6 +7,7 @@ import PolicyDialog from '../components/PolicyDialog';
 import PostCard from '../components/PostCard';
 import AddPostDialog from '../components/AddPostDialog';
 import CommentDialog from '../components/CommentDialog';
+import { ProtectedRoute } from '../components/ProtectedRoute';
 import { useUserActivity } from '../hooks/useUserActivity';
 
 interface Comment {
@@ -29,7 +30,7 @@ interface Post {
 }
 
 const TheWall = () => {
-  // Track user activity when they visit The Wall
+  // Track user activity when they visit The Wall (only for authenticated users)
   useUserActivity('visited_wall', { page: 'The Wall' });
 
   const [posts, setPosts] = useState<Post[]>([
@@ -169,113 +170,115 @@ const TheWall = () => {
   };
 
   return (
-    <div className="min-h-screen bg-ivory font-sans">
-      <Header />
-      
-      <PolicyDialog
-        isOpen={showPolicyDialog}
-        userInitials={userInitials}
-        setUserInitials={setUserInitials}
-        onAgreement={handlePolicyAgreement}
-        isWallSpecific={true}
-      />
+    <ProtectedRoute>
+      <div className="min-h-screen bg-ivory font-sans">
+        <Header />
+        
+        <PolicyDialog
+          isOpen={showPolicyDialog}
+          userInitials={userInitials}
+          setUserInitials={setUserInitials}
+          onAgreement={handlePolicyAgreement}
+          isWallSpecific={true}
+        />
 
-      <section className="py-16 px-4 pb-32">
-        <div className="container mx-auto max-w-6xl">
-          <div className="text-center mb-12">
-            <h1 className="text-5xl md:text-6xl font-bold text-charcoal mb-6 tracking-tight font-display">
-              The Wall 🧱
-            </h1>
-            <p className="text-xl text-gunmetal/90 max-w-2xl mx-auto font-light mb-8">
-              Your voice matters here. Share honest thoughts, challenge perspectives, and build understanding one post at a time.
-            </p>
-          </div>
+        <section className="py-16 px-4 pb-32">
+          <div className="container mx-auto max-w-6xl">
+            <div className="text-center mb-12">
+              <h1 className="text-5xl md:text-6xl font-bold text-charcoal mb-6 tracking-tight font-display">
+                The Wall 🧱
+              </h1>
+              <p className="text-xl text-gunmetal/90 max-w-2xl mx-auto font-light mb-8">
+                Your voice matters here. Share honest thoughts, challenge perspectives, and build understanding one post at a time.
+              </p>
+            </div>
 
-          {/* Current Prompt */}
-          <div className="mb-8">
-            <Card className="bg-gradient-to-br from-sage/20 to-forest/10 border-2 border-sage/30 shadow-xl">
-              <CardHeader className="text-center pb-4">
-                <CardTitle className="text-3xl text-charcoal font-display">This Month's Prompt</CardTitle>
-              </CardHeader>
-              <CardContent className="text-center">
-                <p className="text-2xl text-gunmetal font-medium leading-relaxed">{currentPrompt}</p>
-              </CardContent>
-            </Card>
-          </div>
+            {/* Current Prompt */}
+            <div className="mb-8">
+              <Card className="bg-gradient-to-br from-sage/20 to-forest/10 border-2 border-sage/30 shadow-xl">
+                <CardHeader className="text-center pb-4">
+                  <CardTitle className="text-3xl text-charcoal font-display">This Month's Prompt</CardTitle>
+                </CardHeader>
+                <CardContent className="text-center">
+                  <p className="text-2xl text-gunmetal font-medium leading-relaxed">{currentPrompt}</p>
+                </CardContent>
+              </Card>
+            </div>
 
-          {/* Comment Type Key */}
-          <div className="mb-12">
-            <Card className="bg-gradient-to-r from-dusty/20 to-pearl/30 border border-sage/20">
-              <CardContent className="p-3">
-                <h3 className="text-sm font-semibold text-charcoal mb-2 text-center">Comment Color Guide</h3>
-                <div className="grid grid-cols-2 md:grid-cols-5 gap-2 text-xs">
-                  <div className="flex items-center space-x-1 bg-blue-50/80 p-1.5 rounded border-l-2 border-blue-400">
-                    <MessageCircle className="w-3 h-3 text-blue-600" />
-                    <span className="text-gunmetal font-medium">Personal Opinion</span>
+            {/* Comment Type Key */}
+            <div className="mb-12">
+              <Card className="bg-gradient-to-r from-dusty/20 to-pearl/30 border border-sage/20">
+                <CardContent className="p-3">
+                  <h3 className="text-sm font-semibold text-charcoal mb-2 text-center">Comment Color Guide</h3>
+                  <div className="grid grid-cols-2 md:grid-cols-5 gap-2 text-xs">
+                    <div className="flex items-center space-x-1 bg-blue-50/80 p-1.5 rounded border-l-2 border-blue-400">
+                      <MessageCircle className="w-3 h-3 text-blue-600" />
+                      <span className="text-gunmetal font-medium">Personal Opinion</span>
+                    </div>
+                    <div className="flex items-center space-x-1 bg-purple-50/80 p-1.5 rounded border-l-2 border-purple-400">
+                      <HelpCircle className="w-3 h-3 text-purple-600" />
+                      <span className="text-gunmetal font-medium">Question</span>
+                    </div>
+                    <div className="flex items-center space-x-1 bg-green-50/80 p-1.5 rounded border-l-2 border-green-400">
+                      <FileText className="w-3 h-3 text-green-600" />
+                      <span className="text-gunmetal font-medium">Fact/Data</span>
+                    </div>
+                    <div className="flex items-center space-x-1 bg-emerald-50/80 p-1.5 rounded border-l-2 border-emerald-400">
+                      <Heart className="w-3 h-3 text-emerald-600" />
+                      <span className="text-gunmetal font-medium">Support</span>
+                    </div>
+                    <div className="flex items-center space-x-1 bg-orange-50/80 p-1.5 rounded border-l-2 border-orange-400">
+                      <AlertCircle className="w-3 h-3 text-orange-600" />
+                      <span className="text-gunmetal font-medium">Challenge</span>
+                    </div>
                   </div>
-                  <div className="flex items-center space-x-1 bg-purple-50/80 p-1.5 rounded border-l-2 border-purple-400">
-                    <HelpCircle className="w-3 h-3 text-purple-600" />
-                    <span className="text-gunmetal font-medium">Question</span>
-                  </div>
-                  <div className="flex items-center space-x-1 bg-green-50/80 p-1.5 rounded border-l-2 border-green-400">
-                    <FileText className="w-3 h-3 text-green-600" />
-                    <span className="text-gunmetal font-medium">Fact/Data</span>
-                  </div>
-                  <div className="flex items-center space-x-1 bg-emerald-50/80 p-1.5 rounded border-l-2 border-emerald-400">
-                    <Heart className="w-3 h-3 text-emerald-600" />
-                    <span className="text-gunmetal font-medium">Support</span>
-                  </div>
-                  <div className="flex items-center space-x-1 bg-orange-50/80 p-1.5 rounded border-l-2 border-orange-400">
-                    <AlertCircle className="w-3 h-3 text-orange-600" />
-                    <span className="text-gunmetal font-medium">Challenge</span>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
+                </CardContent>
+              </Card>
+            </div>
 
-          {/* Brick Wall Grid */}
-          <div className="relative">
-            <div className="grid grid-cols-3 gap-4 auto-rows-min">
-              {posts.map((post, index) => (
-                <PostCard
-                  key={post.id}
-                  post={post}
-                  index={index}
-                  onLike={handleLike}
-                  onComment={handleComment}
-                />
-              ))}
+            {/* Brick Wall Grid */}
+            <div className="relative">
+              <div className="grid grid-cols-3 gap-4 auto-rows-min">
+                {posts.map((post, index) => (
+                  <PostCard
+                    key={post.id}
+                    post={post}
+                    index={index}
+                    onLike={handleLike}
+                    onComment={handleComment}
+                  />
+                ))}
+              </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      <AddPostDialog
-        isOpen={isDialogOpen}
-        setIsOpen={setIsDialogOpen}
-        newPost={newPost}
-        setNewPost={setNewPost}
-        userName={userName}
-        setUserName={setUserName}
-        onSubmit={handleSubmit}
-      />
+        <AddPostDialog
+          isOpen={isDialogOpen}
+          setIsOpen={setIsDialogOpen}
+          newPost={newPost}
+          setNewPost={setNewPost}
+          userName={userName}
+          setUserName={setUserName}
+          onSubmit={handleSubmit}
+        />
 
-      <CommentDialog
-        isOpen={isCommentDialogOpen}
-        setIsOpen={setIsCommentDialogOpen}
-        selectedPost={selectedPost}
-        newComment={newComment}
-        setNewComment={setNewComment}
-        commentAuthor={commentAuthor}
-        setCommentAuthor={setCommentAuthor}
-        commentType={commentType}
-        setCommentType={setCommentType}
-        onSubmit={handleCommentSubmit}
-      />
+        <CommentDialog
+          isOpen={isCommentDialogOpen}
+          setIsOpen={setIsCommentDialogOpen}
+          selectedPost={selectedPost}
+          newComment={newComment}
+          setNewComment={setNewComment}
+          commentAuthor={commentAuthor}
+          setCommentAuthor={setCommentAuthor}
+          commentType={commentType}
+          setCommentType={setCommentType}
+          onSubmit={handleCommentSubmit}
+        />
 
-      <Footer />
-    </div>
+        <Footer />
+      </div>
+    </ProtectedRoute>
   );
 };
 
