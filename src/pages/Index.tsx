@@ -8,6 +8,7 @@ import StatsStrip from '../components/StatsStrip';
 import FeaturedContent from '../components/FeaturedContent';
 import Footer from '../components/Footer';
 import PolicyDialog from '../components/PolicyDialog';
+import { AuthProvider } from '../hooks/useAuth';
 
 const Index = () => {
   const [showPolicyDialog, setShowPolicyDialog] = useState(false);
@@ -28,22 +29,24 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-ivory">
-      <PolicyDialog
-        isOpen={showPolicyDialog}
-        userInitials={userInitials}
-        setUserInitials={setUserInitials}
-        onAgreement={handlePolicyAgreement}
-      />
-      
-      <Header />
-      <HeroSection />
-      <WhyYapSection />
-      <FeatureCards />
-      <StatsStrip />
-      <FeaturedContent />
-      <Footer />
-    </div>
+    <AuthProvider>
+      <div className="min-h-screen bg-ivory">
+        <PolicyDialog
+          isOpen={showPolicyDialog}
+          userInitials={userInitials}
+          setUserInitials={setUserInitials}
+          onAgreement={handlePolicyAgreement}
+        />
+        
+        <Header />
+        <HeroSection />
+        <WhyYapSection />
+        <FeatureCards />
+        <StatsStrip />
+        <FeaturedContent />
+        <Footer />
+      </div>
+    </AuthProvider>
   );
 };
 
