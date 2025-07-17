@@ -7,6 +7,7 @@ import PolicyDialog from '../components/PolicyDialog';
 import PostCard from '../components/PostCard';
 import AddPostDialog from '../components/AddPostDialog';
 import CommentDialog from '../components/CommentDialog';
+import { useUserActivity } from '../hooks/useUserActivity';
 
 interface Comment {
   id: number;
@@ -28,6 +29,9 @@ interface Post {
 }
 
 const TheWall = () => {
+  // Track user activity when they visit The Wall
+  useUserActivity('visited_wall', { page: 'The Wall' });
+
   const [posts, setPosts] = useState<Post[]>([
     {
       id: 1,

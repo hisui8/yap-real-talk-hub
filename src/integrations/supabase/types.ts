@@ -14,6 +14,30 @@ export type Database = {
   }
   public: {
     Tables: {
+      user_activity: {
+        Row: {
+          activity: string
+          created_at: string
+          id: string
+          metadata: Json
+          user_id: string
+        }
+        Insert: {
+          activity: string
+          created_at?: string
+          id?: string
+          metadata: Json
+          user_id?: string
+        }
+        Update: {
+          activity?: string
+          created_at?: string
+          id?: string
+          metadata?: Json
+          user_id?: string
+        }
+        Relationships: []
+      }
       user_profiles: {
         Row: {
           created_at: string | null
