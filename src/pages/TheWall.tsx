@@ -247,7 +247,7 @@ const TheWall = () => {
               <div className="grid grid-cols-3 gap-4 auto-rows-min">
                 {/* Display Supabase approved posts first */}
                 {supabasePosts.map((post, index) => (
-                  <div key={`supabase-${post.id}`} className={`${post.color || stickyColors[index % stickyColors.length]} rounded-lg shadow-md p-4 transform rotate-1 hover:rotate-0 transition-all duration-300 hover:shadow-lg cursor-pointer border border-sage/20`}>
+                  <div key={`supabase-${post.id}`} className={`${stickyColors[index % stickyColors.length]} rounded-lg shadow-md p-4 transform rotate-1 hover:rotate-0 transition-all duration-300 hover:shadow-lg cursor-pointer border border-sage/20`}>
                     <div className="mb-3">
                       <div className="flex items-center justify-between mb-2">
                         <span className="text-xs font-medium text-gunmetal/70">Anonymous User</span>

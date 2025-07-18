@@ -1,7 +1,9 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Card, CardContent } from '@/components/ui/card';
+import L from 'leaflet';
+import 'leaflet/dist/leaflet.css';
 
 interface MapEvent {
   id: string;
@@ -15,32 +17,35 @@ interface MapEvent {
 const WorldMap = () => {
   const [selectedEvent, setSelectedEvent] = useState<MapEvent | null>(null);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const mapContainer = useRef<HTMLDivElement>(null);
+  const map = useRef<L.Map | null>(null);
+  const markers = useRef<L.Marker[]>([]);
 
-  // Sample events - you can later fetch these from Supabase
+  // Sample events with lat/lng coordinates for Leaflet
   const events: MapEvent[] = [
     {
       id: '1',
       location: 'New York',
       title: 'Climate Action Rally',
       description: 'Thousands gather in Central Park demanding urgent climate action from world leaders.',
-      x: 25, // percentage from left
-      y: 35  // percentage from top
+      x: 40.7831, // latitude
+      y: -73.9712  // longitude
     },
     {
       id: '2',
       location: 'Gaza',
       title: 'Humanitarian Crisis',
       description: 'International aid organizations working to provide essential supplies to affected civilians.',
-      x: 55,
-      y: 45
+      x: 31.3547,
+      y: 34.3088
     },
     {
       id: '3',
       location: 'Jakarta',
       title: 'Student Protests',
       description: 'University students organize peaceful demonstrations calling for educational reform.',
-      x: 80,
-      y: 60
+      x: -6.2088,
+      y: 106.8456
     }
   ];
 
@@ -49,32 +54,50 @@ const WorldMap = () => {
     setIsDialogOpen(true);
   };
 
+  useEffect(() => {
+    if (!mapContainer.current) return;
+
+    // Initialize map
+    map.current = L.map(mapContainer.current).setView([20, 0], 2);
+
+    // Add OpenStreetMap tiles
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '© OpenStreetMap contributors'
+    }).addTo(map.current);
+
+    // Add markers for events
+    events.forEach((event) => {
+      const marker = L.marker([event.x, event.y]).addTo(map.current!);
+      
+      marker.bindPopup(`<strong>${event.location}</strong><br/>${event.title}`);
+      
+      marker.on('click', () => {
+        handleEventClick(event);
+      });
+      
+      markers.current.push(marker);
+    });
+
+    // Cleanup function
+    return () => {
+      markers.current.forEach(marker => marker.remove());
+      markers.current = [];
+      if (map.current) {
+        map.current.remove();
+        map.current = null;
+      }
+    };
+  }, []);
+
   return (
     <div className="relative w-full max-w-4xl mx-auto">
       <Card className="overflow-hidden">
         <CardContent className="p-0 relative">
-          {/* World Map Image */}
-          <div className="relative w-full h-96 bg-gradient-to-b from-blue-100 to-green-100">
-            {/* Placeholder for world map - you can upload your own image */}
-            <div className="absolute inset-0 flex items-center justify-center text-gunmetal/50">
-              <span className="text-lg">Upload your world map image here</span>
-            </div>
-            
-            {/* Event Dots */}
-            {events.map((event) => (
-              <button
-                key={event.id}
-                onClick={() => handleEventClick(event)}
-                className="absolute w-4 h-4 bg-red-500 rounded-full border-2 border-white shadow-lg hover:bg-red-600 hover:scale-110 transition-all duration-200 animate-pulse"
-                style={{
-                  left: `${event.x}%`,
-                  top: `${event.y}%`,
-                  transform: 'translate(-50%, -50%)'
-                }}
-                title={event.location}
-              />
-            ))}
-          </div>
+          {/* Leaflet Map Container */}
+          <div 
+            ref={mapContainer} 
+            className="w-full h-96"
+          />
         </CardContent>
       </Card>
 
