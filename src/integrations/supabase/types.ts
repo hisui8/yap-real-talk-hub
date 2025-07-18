@@ -14,27 +14,102 @@ export type Database = {
   }
   public: {
     Tables: {
+      map_events: {
+        Row: {
+          created_at: string | null
+          description: string | null
+          location: string
+          title: string | null
+          user_id: string
+          x_pos: number | null
+          y_pos: number | null
+        }
+        Insert: {
+          created_at?: string | null
+          description?: string | null
+          location: string
+          title?: string | null
+          user_id?: string
+          x_pos?: number | null
+          y_pos?: number | null
+        }
+        Update: {
+          created_at?: string | null
+          description?: string | null
+          location?: string
+          title?: string | null
+          user_id?: string
+          x_pos?: number | null
+          y_pos?: number | null
+        }
+        Relationships: []
+      }
+      product_clicks: {
+        Row: {
+          product_id: string
+          timestamp: string | null
+          user_id: string
+        }
+        Insert: {
+          product_id: string
+          timestamp?: string | null
+          user_id?: string
+        }
+        Update: {
+          product_id?: string
+          timestamp?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
+      scroll_media: {
+        Row: {
+          created_art: string | null
+          description: string | null
+          media_type: string
+          media_url: string | null
+          title: string
+          user_id: string
+        }
+        Insert: {
+          created_art?: string | null
+          description?: string | null
+          media_type: string
+          media_url?: string | null
+          title: string
+          user_id?: string
+        }
+        Update: {
+          created_art?: string | null
+          description?: string | null
+          media_type?: string
+          media_url?: string | null
+          title?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       user_activity: {
         Row: {
           activity: string
           created_at: string
           id: string
           metadata: Json
-          user_id: string
+          user_id: string | null
         }
         Insert: {
           activity: string
           created_at?: string
           id?: string
           metadata: Json
-          user_id?: string
+          user_id?: string | null
         }
         Update: {
           activity?: string
           created_at?: string
           id?: string
           metadata?: Json
-          user_id?: string
+          user_id?: string | null
         }
         Relationships: []
       }
@@ -65,6 +140,7 @@ export type Database = {
           created_at: string | null
           id: string
           month_tag: string | null
+          status: string | null
           user_id: string
         }
         Insert: {
@@ -72,6 +148,7 @@ export type Database = {
           created_at?: string | null
           id?: string
           month_tag?: string | null
+          status?: string | null
           user_id?: string
         }
         Update: {
@@ -79,6 +156,7 @@ export type Database = {
           created_at?: string | null
           id?: string
           month_tag?: string | null
+          status?: string | null
           user_id?: string
         }
         Relationships: []

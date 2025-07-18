@@ -13,19 +13,13 @@ export const useUserActivity = (activity: string, metadata: ActivityMetadata = {
 
   useEffect(() => {
     const trackActivity = async () => {
-      // Only track activity for authenticated users
-      if (!user || loading) {
-        console.log('User activity not tracked: user not authenticated');
-        return;
-      }
-
       try {
-        console.log('Tracking user activity:', { activity, metadata, userId: user.id });
+        console.log('Tracking user activity:', { activity, metadata, userId: user?.id || 'anonymous' });
         
         const { error } = await supabase
           .from('user_activity')
           .insert({
-            user_id: user.id,
+            user_id: user?.id || null, // Allow null for anonymous users
             activity,
             metadata
           });
@@ -40,8 +34,8 @@ export const useUserActivity = (activity: string, metadata: ActivityMetadata = {
       }
     };
 
-    // Only track when user is confirmed to be authenticated
-    if (user && !loading) {
+    // Track activity for both authenticated and anonymous users
+    if (!loading) {
       trackActivity();
     }
   }, [user, loading, activity, JSON.stringify(metadata)]);
