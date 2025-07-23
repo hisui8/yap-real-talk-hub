@@ -56,7 +56,7 @@ const WorldMap = () => {
           {/* World Map Image */}
           <div className="relative w-full h-96">
             <img 
-              src="/lovable-uploads/7e53f9e0-b684-4719-b44f-cb5a7ebf6a7d.png" 
+              src="/lovable-uploads/9baf92e2-d116-42e9-9c52-e1a4d58e6e97.png" 
               alt="World Map" 
               className="w-full h-full object-contain bg-white"
             />
