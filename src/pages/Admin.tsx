@@ -26,7 +26,7 @@ const Admin = () => {
   });
 
   // Simple admin check - you might want to implement proper role-based auth
-  const isAdmin = user?.email === 'admin@example.com'; // Replace with your admin email
+  const isAdmin = user?.email === 'kanghisu23@gmail.com';
 
   if (!user) {
     return <Navigate to="/" replace />;
